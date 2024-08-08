@@ -7,4 +7,5 @@ export interface DbConfig {
   name: string
   password: string
   port: number
+  user: string
 }
