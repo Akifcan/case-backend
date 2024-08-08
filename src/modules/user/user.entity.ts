@@ -19,7 +19,7 @@ export class User {
   @Column({ unique: true })
   email: string
 
-  @Column({ type: 'enum', enum: UserRole })
+  @Column({ type: 'enum', enum: UserRole, default: UserRole.user })
   role: UserRole
 
   @CreateDateColumn()
