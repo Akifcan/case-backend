@@ -2,10 +2,13 @@ import { Module } from '@nestjs/common'
 import { UserModule } from './modules/user/user.module'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule, ConfigService } from '@nestjs/config'
-import { DbConfig } from './config/config.interface'
+import { DbConfig, JwtProps } from './config/config.interface'
 import { AuthModule } from './modules/auth/auth.module'
-import { ProductModule } from './modules/product/product.module';
+import { ProductModule } from './modules/product/product.module'
 import configuration from './config/configuration'
+import { APP_GUARD } from '@nestjs/core'
+import { AuthGuard } from './modules/auth/auth.guard'
+import { JwtModule } from '@nestjs/jwt'
 
 @Module({
   imports: [
@@ -27,9 +30,27 @@ import configuration from './config/configuration'
         }
       },
     }),
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => {
+        const jwt = configService.get<JwtProps>('jwt')
+        return {
+          global: true,
+          secret: jwt.secret,
+          signOptions: { expiresIn: jwt.expires },
+        }
+      },
+    }),
     UserModule,
     AuthModule,
     ProductModule,
+  ],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
   ],
 })
 export class AppModule {}
