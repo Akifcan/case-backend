@@ -1,7 +1,11 @@
 import { Controller, Get } from '@nestjs/common'
+import { CurrentUser } from 'src/decorators/current-user.decorator'
+import { User } from '../user/user.entity'
 
 @Controller('product')
 export class ProductController {
   @Get()
-  products() {}
+  products(@CurrentUser() currentUser: User) {
+    return currentUser
+  }
 }
