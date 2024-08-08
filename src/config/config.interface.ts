@@ -9,3 +9,8 @@ export interface DbConfig {
   port: number
   user: string
 }
+
+export interface JwtProps {
+  secret: string
+  expires: string
+}
