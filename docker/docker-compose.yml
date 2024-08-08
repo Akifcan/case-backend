@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: case_password
+      POSTGRES_USER: case_user
+      POSTGRES_DB: case_db
+    container_name: db_case
