@@ -2,14 +2,16 @@ import { Module } from '@nestjs/common'
 import { UserModule } from './modules/user/user.module'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule, ConfigService } from '@nestjs/config'
-import { DbConfig, JwtProps } from './config/config.interface'
+import { AppConfig, DbConfig, JwtProps } from './config/config.interface'
 import { AuthModule } from './modules/auth/auth.module'
 import { ProductModule } from './modules/product/product.module'
-import configuration from './config/configuration'
 import { APP_GUARD } from '@nestjs/core'
 import { AuthGuard } from './modules/auth/auth.guard'
 import { JwtModule } from '@nestjs/jwt'
-import { CategoryModule } from './modules/category/category.module';
+import { CategoryModule } from './modules/category/category.module'
+import { HeaderResolver, I18nModule } from 'nestjs-i18n'
+import configuration from './config/configuration'
+import { join } from 'path'
 
 @Module({
   imports: [
@@ -18,7 +20,7 @@ import { CategoryModule } from './modules/category/category.module';
       inject: [ConfigService],
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => {
-        const dbConfig = configService.get<DbConfig>('database')
+        const dbConfig = configService.getOrThrow<DbConfig>('database')
         return {
           type: 'postgres',
           host: dbConfig.host,
@@ -35,13 +37,25 @@ import { CategoryModule } from './modules/category/category.module';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
-        const jwt = configService.get<JwtProps>('jwt')
+        const jwt = configService.getOrThrow<JwtProps>('jwt')
         return {
           global: true,
           secret: jwt.secret,
           signOptions: { expiresIn: jwt.expires },
         }
       },
+    }),
+    I18nModule.forRootAsync({
+      useFactory: (configService: ConfigService) => ({
+        fallbackLanguage: configService.getOrThrow<AppConfig>('app').fallbackLanguage,
+        loaderOptions: {
+          path: join(__dirname, '/i18n/'),
+          watch: true,
+        },
+        typesOutputPath: join(__dirname, '../src/generated/i18n.generated.ts'),
+      }),
+      resolvers: [new HeaderResolver(['x-lang'])],
+      inject: [ConfigService],
     }),
     UserModule,
     AuthModule,

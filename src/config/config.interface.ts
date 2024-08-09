@@ -1,5 +1,6 @@
 export interface AppConfig {
   port: number
+  fallbackLanguage: string
 }
 
 export interface DbConfig {

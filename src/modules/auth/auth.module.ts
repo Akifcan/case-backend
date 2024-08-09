@@ -13,7 +13,7 @@ import { JwtProps } from 'src/config/config.interface'
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
-        const jwt = configService.get<JwtProps>('jwt')
+        const jwt = configService.getOrThrow<JwtProps>('jwt')
         return {
           secret: jwt.secret,
           signOptions: { expiresIn: jwt.expires },

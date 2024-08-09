@@ -6,11 +6,14 @@ import { RegisterDto } from './dtos/register.dto'
 import { LoginDto } from './dtos/login.dto'
 import * as bcrypt from 'bcrypt'
 import { JwtService } from '@nestjs/jwt'
+import { I18nContext, I18nService } from 'nestjs-i18n'
+import { I18nTranslations } from '../../generated/i18n.generated'
 
 @Injectable()
 export class AuthService {
   @InjectRepository(User) userRepository: Repository<User>
   @Inject() jwtService: JwtService
+  @Inject() i18n: I18nService<I18nTranslations>
 
   private async isEmailExists(email: string) {
     const count = await this.userRepository.count({ where: { email } })
@@ -22,7 +25,7 @@ export class AuthService {
 
     if (isEmailExists) {
       throw new UnauthorizedException({
-        message: 'This user already exists',
+        message: this.i18n.t('auth.userExists', { lang: I18nContext.current().lang }),
         error_code: 'auth.already_exists',
       })
     }
@@ -53,7 +56,7 @@ export class AuthService {
 
     if (!user) {
       throw new UnauthorizedException({
-        message: 'This user not found',
+        message: this.i18n.t('auth.userNotFound', { lang: I18nContext.current().lang }),
         error_code: 'auth.not_found',
       })
     }
@@ -62,7 +65,7 @@ export class AuthService {
 
     if (!compare) {
       throw new UnauthorizedException({
-        message: 'This user not found',
+        message: this.i18n.t('auth.userNotFound', { lang: I18nContext.current().lang }),
         error_code: 'auth.not_found',
       })
     }
