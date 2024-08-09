@@ -1,5 +1,5 @@
 import { IsNotEmpty, Matches, MaxLength } from 'class-validator'
-import { AUTH_PASSWORD_REGEX } from '../auth.common'
+import { AUTH_PASSWORD_REGEX } from '../../../shared/shared.regex'
 
 export class LoginDto {
   @IsNotEmpty()

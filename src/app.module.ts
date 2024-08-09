@@ -9,6 +9,7 @@ import configuration from './config/configuration'
 import { APP_GUARD } from '@nestjs/core'
 import { AuthGuard } from './modules/auth/auth.guard'
 import { JwtModule } from '@nestjs/jwt'
+import { CategoryModule } from './modules/category/category.module';
 
 @Module({
   imports: [
@@ -45,6 +46,7 @@ import { JwtModule } from '@nestjs/jwt'
     UserModule,
     AuthModule,
     ProductModule,
+    CategoryModule,
   ],
   providers: [
     {
