@@ -3,3 +3,9 @@ export enum Locale {
   en = 'en',
   ar = 'ar',
 }
+
+export enum Currency {
+  tl = '₺',
+  euro = '€',
+  dollar = '$',
+}

@@ -7,19 +7,22 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
-import { Category } from './category.entity'
+import { Product } from './product.entity'
 import { LocaleEntity } from '../../shared/locale.entity'
 
-@Entity({ name: 'category_i18n' })
-export class CategoryI18n extends LocaleEntity {
+@Entity({ name: 'product_i18n' })
+export class ProductI18n extends LocaleEntity {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column({ unique: true })
+  @Column()
   name: string
 
-  @Column({ unique: true })
-  slug: string
+  @Column()
+  description: string
+
+  @ManyToOne(() => Product, (product) => product.id, { onDelete: 'CASCADE' })
+  product: Product
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date
@@ -29,9 +32,4 @@ export class CategoryI18n extends LocaleEntity {
 
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: Date
-
-  //   Relations
-
-  @ManyToOne(() => Category, (category) => category.id, { onDelete: 'CASCADE' })
-  category: Category
 }
