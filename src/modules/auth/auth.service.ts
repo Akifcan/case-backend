@@ -1,4 +1,4 @@
-import { BadRequestException, Inject, Injectable } from '@nestjs/common'
+import { Inject, Injectable, UnauthorizedException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { User } from '../user/user.entity'
 import { Repository } from 'typeorm'
@@ -21,7 +21,7 @@ export class AuthService {
     const isEmailExists = await this.isEmailExists(registerDto.email)
 
     if (isEmailExists) {
-      throw new BadRequestException({
+      throw new UnauthorizedException({
         message: 'This user already exists',
         error_code: 'auth.already_exists',
       })
@@ -52,7 +52,7 @@ export class AuthService {
     })
 
     if (!user) {
-      throw new BadRequestException({
+      throw new UnauthorizedException({
         message: 'This user not found',
         error_code: 'auth.not_found',
       })
@@ -61,7 +61,7 @@ export class AuthService {
     const compare = bcrypt.compareSync(loginDto.password, user.password)
 
     if (!compare) {
-      throw new BadRequestException({
+      throw new UnauthorizedException({
         message: 'This user not found',
         error_code: 'auth.not_found',
       })
