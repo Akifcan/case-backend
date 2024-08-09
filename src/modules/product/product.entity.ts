@@ -3,10 +3,12 @@ import {
   DeleteDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
 import { Category } from '../category/category.entity'
+import { ProductPricing } from './entities/product-pricing.entity'
 
 @Entity()
 export class Product {
@@ -15,6 +17,9 @@ export class Product {
 
   @ManyToOne(() => Category, (category) => category.id, { onDelete: 'CASCADE' })
   category: Category
+
+  @OneToMany(() => ProductPricing, (productPricing) => productPricing.product)
+  productPricing: ProductPricing[]
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date

@@ -7,22 +7,19 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
-import { Product } from './product.entity'
-import { Currency } from '../../shared/shared.types'
+import { Category } from '../../category/category.entity'
+import { Product } from '../product.entity'
 
-@Entity({ name: 'product_pricing' })
-export class ProductPricing {
+@Entity({ name: 'product_image' })
+export class ProductImage {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column({ type: 'decimal' })
-  price: number
+  @Column({ name: 'alt_tag' })
+  altTag: string
 
-  @Column({ type: 'decimal', nullable: true })
-  discountPrice: number
-
-  @Column({ type: 'enum', enum: Currency })
-  currency: Currency
+  @Column()
+  src: string
 
   @ManyToOne(() => Product, (product) => product.id, { onDelete: 'CASCADE' })
   product: Product
