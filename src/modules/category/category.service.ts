@@ -1,6 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Category } from './category.entity'
 import { Repository } from 'typeorm'
 import { CategoryI18n } from './category-i18n.entity'
 import { Locale } from 'src/shared/shared.types'
@@ -9,7 +8,6 @@ import { I18nContext, I18nService } from 'nestjs-i18n'
 
 @Injectable()
 export class CategoryService {
-  @InjectRepository(Category) categoryRepository: Repository<Category>
   @InjectRepository(CategoryI18n) categoryI18nRepository: Repository<CategoryI18n>
   @Inject() i18n: I18nService<I18nTranslations>
 

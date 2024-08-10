@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
-import { Product } from '../product.entity'
+import { Product } from './product.entity'
 import { LocaleEntity } from '../../../shared/locale.entity'
 
 @Entity({ name: 'product_i18n' })

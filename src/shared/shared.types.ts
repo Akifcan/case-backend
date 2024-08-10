@@ -4,8 +4,10 @@ export enum Locale {
   ar = 'ar',
 }
 
+export type CurrencyValue = 'tl' | 'euro' | 'dollar'
+
 export enum Currency {
-  tl = '₺',
-  euro = '€',
-  dollar = '$',
+  tl = 'tl',
+  euro = 'euro',
+  dollar = 'dollar',
 }

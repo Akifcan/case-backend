@@ -1,24 +1,38 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Product } from './product.entity'
 import { Repository } from 'typeorm'
 import { ProductI18n } from './entities/product-i18n.entity'
 import { I18nContext } from 'nestjs-i18n'
 import { Locale } from '../../shared/shared.types'
 import { ProductTransformer } from './product.transformer'
+import { ProductListDto } from './dtos/product-list.dto'
+import { ProductQueryDto } from './dtos/product-query.dto'
 
 @Injectable()
 export class ProductService {
-  @InjectRepository(Product) productRepository: Repository<Product>
   @InjectRepository(ProductI18n) productI18nRepository: Repository<ProductI18n>
 
   @Inject() productTransformer: ProductTransformer
 
-  async products() {
+  async products(productListDto: ProductListDto, productQueryDto: ProductQueryDto) {
+    const whereQuery = { language: I18nContext.current().lang as Locale }
+    const skip = (productQueryDto.page - 1) * productQueryDto.limit
+
     const products = await this.productI18nRepository.find({
+      select: { id: true, name: true, description: true, product: { id: true } },
       relations: ['product'],
-      where: { language: I18nContext.current().lang as Locale },
+      where: whereQuery,
+      skip,
+      take: productQueryDto.limit,
     })
-    return this.productTransformer.productsToPublicEntity(products)
+
+    const productCount = await this.productI18nRepository.count({
+      where: whereQuery,
+    })
+
+    return {
+      products: await this.productTransformer.productsToPublicEntity(products, productListDto),
+      totalPage: Math.ceil(productCount / productQueryDto.limit),
+    }
   }
 }
