@@ -1,6 +1,6 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository } from 'typeorm'
+import { FindOptionsWhere, Repository } from 'typeorm'
 import { ProductI18n } from './entities/product-i18n.entity'
 import { I18nContext } from 'nestjs-i18n'
 import { Locale } from '../../shared/shared.types'
@@ -15,8 +15,11 @@ export class ProductService {
   @Inject() productTransformer: ProductTransformer
 
   async products(productListDto: ProductListDto, productQueryDto: ProductQueryDto) {
-    const whereQuery = { language: I18nContext.current().lang as Locale }
-    const skip = (productQueryDto.page - 1) * productQueryDto.limit
+    const whereQuery: FindOptionsWhere<ProductI18n> = {
+      language: I18nContext.current().lang as Locale,
+      product: { category: { id: productListDto.category } },
+    }
+    const skip: number = (productQueryDto.page - 1) * productQueryDto.limit
 
     const products = await this.productI18nRepository.find({
       select: { id: true, name: true, description: true, slug: true, product: { id: true } },
