@@ -16,7 +16,7 @@ export class ProductService {
 
   async products(productListDto: ProductListDto, productQueryDto: ProductQueryDto) {
     const whereQuery: FindOptionsWhere<ProductI18n> = {
-      language: I18nContext.current().lang as Locale,
+      language: I18nContext.current()?.lang as Locale,
       product: { category: { id: productListDto.category } },
     }
     const skip: number = (productQueryDto.page - 1) * productQueryDto.limit
@@ -43,7 +43,7 @@ export class ProductService {
     const product = await this.productI18nRepository.findOne({
       select: { id: true, name: true, description: true, slug: true, product: { id: true } },
       relations: ['product'],
-      where: { slug, language: I18nContext.current().lang as Locale },
+      where: { slug, language: I18nContext.current()?.lang as Locale },
     })
 
     if (!product) {

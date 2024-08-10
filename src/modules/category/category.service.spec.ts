@@ -17,5 +17,12 @@ describe('CategoryService', () => {
     expect(service).toBeDefined()
   })
 
-  it('should list the categories', () => {})
+  it('should list the categories', async () => {
+    const result = await service.categories()
+    expect(Array.isArray(result)).toBe(true)
+    const obj = result[0]
+    expect(obj).toHaveProperty('name')
+    expect(obj).toHaveProperty('slug')
+    expect(obj).toHaveProperty('category')
+  })
 })

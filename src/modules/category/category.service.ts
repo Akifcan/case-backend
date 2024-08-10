@@ -15,7 +15,7 @@ export class CategoryService {
     return this.categoryI18nRepository.find({
       select: { name: true, slug: true, category: { id: true } },
       relations: ['category'],
-      where: { language: I18nContext.current().lang as Locale },
+      where: { language: I18nContext.current()?.lang as Locale },
     })
   }
 }
