@@ -12,7 +12,7 @@ import { CategoryModule } from './modules/category/category.module'
 import { HeaderResolver, I18nModule } from 'nestjs-i18n'
 import configuration from './config/configuration'
 import { join } from 'path'
-import { SeedModule } from './seed/seed.module';
+import { SeedModule } from './seed/seed.module'
 
 @Module({
   imports: [
@@ -47,14 +47,16 @@ import { SeedModule } from './seed/seed.module';
       },
     }),
     I18nModule.forRootAsync({
-      useFactory: (configService: ConfigService) => ({
-        fallbackLanguage: configService.getOrThrow<AppConfig>('app').fallbackLanguage,
-        loaderOptions: {
-          path: join(__dirname, '/i18n/'),
-          watch: true,
-        },
-        typesOutputPath: join(__dirname, '../src/generated/i18n.generated.ts'),
-      }),
+      useFactory: (configService: ConfigService) => {
+        return {
+          fallbackLanguage: configService.getOrThrow<AppConfig>('app').fallbackLanguage,
+          loaderOptions: {
+            path: join(__dirname, '/i18n/'),
+            watch: true,
+          },
+          typesOutputPath: join(__dirname, '../src/generated/i18n.generated.ts'),
+        }
+      },
       resolvers: [new HeaderResolver(['x-lang'])],
       inject: [ConfigService],
     }),

@@ -45,9 +45,8 @@ describe('AuthService', () => {
   it('should throw an error if user credientials are wrong', async () => {
     const userObj: LoginDto = {
       email: 'usertestnotexists@case.com',
-      password: 'testuserpassword',
+      password: 'testuserpassword123A%',
     }
-
     try {
       await service.login(userObj)
       expect(true).toBe(false)

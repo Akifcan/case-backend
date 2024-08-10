@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { CategoryI18n } from './category-i18n.entity'
-import { Locale } from 'src/shared/shared.types'
+import { Locale } from '../../shared/shared.types'
 import { I18nTranslations } from '../../generated/i18n.generated'
 import { I18nContext, I18nService } from 'nestjs-i18n'
 

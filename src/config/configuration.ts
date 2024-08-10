@@ -1,7 +1,7 @@
 export default () => ({
   app: {
     port: parseInt(process.env.APP_PORT),
-    fallbackLanguage: process.env.fallbackLanguage,
+    fallbackLanguage: process.env.FALLBACK_LANGUAGE,
   },
   database: {
     name: process.env.DB_NAME,

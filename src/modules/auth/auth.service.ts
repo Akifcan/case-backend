@@ -25,7 +25,7 @@ export class AuthService {
 
     if (isEmailExists) {
       throw new UnauthorizedException({
-        message: this.i18n.t('auth.userExists', { lang: I18nContext.current().lang }),
+        message: this.i18n.t('auth.userExists', { lang: I18nContext.current()?.lang }),
         error_code: 'auth.already_exists',
       })
     }
@@ -56,7 +56,7 @@ export class AuthService {
 
     if (!user) {
       throw new UnauthorizedException({
-        message: this.i18n.t('auth.userNotFound', { lang: I18nContext.current().lang }),
+        message: this.i18n.t('auth.userNotFound', { lang: I18nContext.current()?.lang }),
         error_code: 'auth.not_found',
       })
     }
@@ -65,7 +65,7 @@ export class AuthService {
 
     if (!compare) {
       throw new UnauthorizedException({
-        message: this.i18n.t('auth.userNotFound', { lang: I18nContext.current().lang }),
+        message: this.i18n.t('auth.userNotFound', { lang: I18nContext.current()?.lang }),
         error_code: 'auth.not_found',
       })
     }

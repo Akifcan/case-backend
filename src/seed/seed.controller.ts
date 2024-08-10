@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Category } from 'src/modules/category/category.entity'
+import { Category } from '../modules/category/category.entity'
 import { User } from '../modules/user/user.entity'
 import { UserRole } from '../modules/user/user.types'
 import { Repository } from 'typeorm'
