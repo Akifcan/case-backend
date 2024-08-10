@@ -21,6 +21,9 @@ export class ProductI18n extends LocaleEntity {
   @Column()
   description: string
 
+  @Column()
+  slug: string
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date
 
