@@ -15,12 +15,6 @@ export class Product {
   @PrimaryGeneratedColumn()
   id: number
 
-  @ManyToOne(() => Category, (category) => category.id, { onDelete: 'CASCADE' })
-  category: Category
-
-  @OneToMany(() => ProductPricing, (productPricing) => productPricing.product)
-  productPricing: ProductPricing[]
-
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date
 
@@ -29,4 +23,12 @@ export class Product {
 
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: Date
+
+  // Relations
+
+  @ManyToOne(() => Category, (category) => category.id, { onDelete: 'CASCADE', nullable: false })
+  category: Category
+
+  @OneToMany(() => ProductPricing, (productPricing) => productPricing.product)
+  productPricing: ProductPricing[]
 }

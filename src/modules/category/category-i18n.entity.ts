@@ -32,6 +32,6 @@ export class CategoryI18n extends LocaleEntity {
 
   //   Relations
 
-  @ManyToOne(() => Category, (category) => category.id, { onDelete: 'CASCADE' })
+  @ManyToOne(() => Category, (category) => category.id, { onDelete: 'CASCADE', nullable: false })
   category: Category
 }

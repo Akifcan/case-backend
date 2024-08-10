@@ -24,9 +24,6 @@ export class ProductPricing {
   @Column({ type: 'enum', enum: Currency })
   currency: Currency
 
-  @ManyToOne(() => Product, (product) => product.id, { onDelete: 'CASCADE' })
-  product: Product
-
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date
 
@@ -35,4 +32,9 @@ export class ProductPricing {
 
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: Date
+
+  // Relations
+
+  @ManyToOne(() => Product, (product) => product.id, { onDelete: 'CASCADE', nullable: false })
+  product: Product
 }

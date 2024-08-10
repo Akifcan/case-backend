@@ -21,9 +21,6 @@ export class ProductImage {
   @Column()
   src: string
 
-  @ManyToOne(() => Product, (product) => product.id, { onDelete: 'CASCADE' })
-  product: Product
-
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date
 
@@ -32,4 +29,9 @@ export class ProductImage {
 
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: Date
+
+  // Relations
+
+  @ManyToOne(() => Product, (product) => product.id, { onDelete: 'CASCADE', nullable: false })
+  product: Product
 }
