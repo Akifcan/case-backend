@@ -13,7 +13,7 @@ export class ProductTransformer {
   async productToPublicEntity(product: ProductI18n, productListDto: ProductListDto) {
     const pricing = await this.productPricingRepository.findOne({
       select: { id: true, price: true, discountPrice: true, currency: true },
-      where: { product: { id: product.id }, currency: productListDto.currency as Currency },
+      where: { product: { id: product.product.id }, currency: productListDto.currency as Currency },
     })
     const images = await this.productImageRepository.find({
       relations: ['product'],

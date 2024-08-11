@@ -7,9 +7,10 @@ import { ProductI18n } from './entities/product-i18n.entity'
 import { ProductImage } from './entities/product-image.entity'
 import { ProductPricing } from './entities/product-pricing.entity'
 import { ProductTransformer } from './product.transformer'
+import { CategoryI18n } from '../category/category-i18n.entity'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Product, ProductI18n, ProductImage, ProductPricing])],
+  imports: [TypeOrmModule.forFeature([Product, ProductI18n, ProductImage, ProductPricing, CategoryI18n])],
   providers: [ProductService, ProductTransformer],
   controllers: [ProductController],
 })

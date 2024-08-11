@@ -1,4 +1,4 @@
-import { IsIn, IsNotEmpty, IsNumber, IsNumberString, IsOptional } from 'class-validator'
+import { IsIn, IsNotEmpty, IsOptional, Max, MaxLength } from 'class-validator'
 import { CurrencyValue } from '../../../shared/shared.types'
 
 export class ProductListDto {
@@ -7,6 +7,9 @@ export class ProductListDto {
   currency: CurrencyValue
 
   @IsOptional()
-  @IsNumber()
-  category?: number
+  category?: string
+
+  @IsOptional()
+  @MaxLength(100)
+  keyword?: string
 }

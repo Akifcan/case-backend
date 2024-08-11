@@ -21,7 +21,7 @@ describe('ProductService', () => {
     const result = await service.products(
       {
         currency: 'tl',
-        category: 2,
+        category: 'ayakkabi',
       },
       {
         page: 1,
@@ -46,7 +46,7 @@ describe('ProductService', () => {
     const result = await service.products(
       {
         currency: 'tl',
-        category: 2,
+        category: 'ayakkabi',
       },
       {
         page: 1,
