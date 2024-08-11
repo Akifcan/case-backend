@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Param, Post, Query } from '@nestjs/common'
+import { Body, Controller, Headers, Inject, Param, Post, Query } from '@nestjs/common'
 import { ProductService } from './product.service'
 import { ProductListDto } from './dtos/product-list.dto'
 import { Public } from '../../decorators/is-public.decorator'
