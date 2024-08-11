@@ -13,6 +13,7 @@ import { HeaderResolver, I18nModule } from 'nestjs-i18n'
 import configuration from './config/configuration'
 import { join } from 'path'
 import { SeedModule } from './seed/seed.module'
+import { BasketModule } from './modules/basket/basket.module';
 
 @Module({
   imports: [
@@ -65,6 +66,7 @@ import { SeedModule } from './seed/seed.module'
     ProductModule,
     CategoryModule,
     SeedModule,
+    BasketModule,
   ],
   providers: [
     {
