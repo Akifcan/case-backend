@@ -36,6 +36,9 @@ export class AuthGuard implements CanActivate {
         return true
       }
     } catch (e) {
+      if (isPublic) {
+        return true
+      }
       throw new UnauthorizedException({
         message: e.message,
         errorCode: e.name,
