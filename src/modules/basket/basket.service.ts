@@ -38,7 +38,8 @@ export class BasketService {
         message: this.i18n.t('basket.added', { lang: I18nContext.current()?.lang }),
       }
     } else {
-      await this.basketRepository.update(where, { quantity: (basket.quantity += 1) })
+      const quantity = basketDto?.quantity ?? 1
+      await this.basketRepository.update(where, { quantity: (basket.quantity += quantity) })
       return {
         message: this.i18n.t('basket.updated', { lang: I18nContext.current()?.lang }),
       }
