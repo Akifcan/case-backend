@@ -1,4 +1,4 @@
-import { Body, Controller, Inject, Param, Post } from '@nestjs/common'
+import { Body, Controller, Delete, Inject, Param, Post } from '@nestjs/common'
 import { Public } from '../../decorators/is-public.decorator'
 import { BasketDto } from './dtos/basket.dto'
 import { CurrentUser } from '../../decorators/current-user.decorator'
@@ -13,5 +13,11 @@ export class BasketController {
   @Post(':productId')
   basket(@Param('productId') productId: number, @Body() basketDto: BasketDto, @CurrentUser() user: User) {
     return this.basketService.addToBasket(productId, basketDto, user)
+  }
+
+  @Public()
+  @Delete(':productId')
+  removeFromBasket(@Param('productId') productId: number, @Body() basketDto: BasketDto) {
+    return this.basketService.removeFromBasket(productId, basketDto)
   }
 }

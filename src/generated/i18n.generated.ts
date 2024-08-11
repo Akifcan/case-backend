@@ -12,6 +12,7 @@ export type I18nTranslations = {
     "basket": {
         "added": string;
         "updated": string;
+        "removed": string;
     };
 };
 /* prettier-ignore */
