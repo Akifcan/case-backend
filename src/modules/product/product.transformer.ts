@@ -3,7 +3,7 @@ import { ProductListDto } from './dtos/product-list.dto'
 import { ProductI18n } from './entities/product-i18n.entity'
 import { ProductPricing } from './entities/product-pricing.entity'
 import { Repository } from 'typeorm'
-import { Currency } from '../../shared/shared.types'
+import { Currency, currencySymbols } from '../../shared/shared.types'
 import { ProductImage } from './entities/product-image.entity'
 
 export class ProductTransformer {
@@ -20,7 +20,17 @@ export class ProductTransformer {
       select: { altTag: true, src: true },
       where: { product: { id: product.product.id } },
     })
-    return { ...product, ...pricing, images }
+    return {
+      ...product,
+      ...pricing,
+      pricingLabels: {
+        discountPrice: pricing.discountPrice
+          ? `${pricing.discountPrice}${currencySymbols[productListDto.currency]}`
+          : undefined,
+        price: `${pricing.price}${currencySymbols[productListDto.currency]}`,
+      },
+      images,
+    }
   }
 
   async productsToPublicEntity(products: ProductI18n[], productListDto: ProductListDto) {
