@@ -5,6 +5,7 @@ import { ProductPricing } from './entities/product-pricing.entity'
 import { Repository } from 'typeorm'
 import { Currency, currencySymbols } from '../../shared/shared.types'
 import { ProductImage } from './entities/product-image.entity'
+import { priceLabel } from '../../shared/shared.function'
 
 export class ProductTransformer {
   @InjectRepository(ProductPricing) productPricingRepository: Repository<ProductPricing>
@@ -25,9 +26,9 @@ export class ProductTransformer {
       ...pricing,
       pricingLabels: {
         discountPrice: pricing.discountPrice
-          ? `${pricing.discountPrice}${currencySymbols[productListDto.currency]}`
+          ? priceLabel(pricing.discountPrice, productListDto.currency)
           : undefined,
-        price: `${pricing.price}${currencySymbols[productListDto.currency]}`,
+        price: priceLabel(pricing.price, productListDto.currency),
       },
       images,
     }

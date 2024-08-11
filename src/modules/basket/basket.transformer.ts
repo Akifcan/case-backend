@@ -7,6 +7,7 @@ import { Currency, Locale, currencySymbols } from '../../shared/shared.types'
 import { ProductImage } from '../product/entities/product-image.entity'
 import { ProductPricing } from '../product/entities/product-pricing.entity'
 import { BasketDto } from './dtos/basket.dto'
+import { priceLabel } from '../../shared/shared.function'
 
 @Injectable()
 export class BasketTransformer {
@@ -44,16 +45,24 @@ export class BasketTransformer {
         price: pricing.price,
         discountPrice: pricing?.discountPrice,
         labels: {
-          totalPrice: `${totalPrice}${currencySymbols[currency]}`,
-          unitPrice: `${unitPrice}${currencySymbols[currency]}`,
+          totalPrice: priceLabel(totalPrice, currency),
+          unitPrice: priceLabel(unitPrice, currency),
         },
       },
     }
   }
 
   async basketsToPublicEntity(basketDto: BasketDto, baskets: Basket[], locale: Locale) {
-    return Promise.all(
+    const basket = await Promise.all(
       baskets.map(async (basket) => await this.basketToPublicEntity(basketDto, basket, locale)),
     )
+    const totalPrice = basket.reduce((total, current) => (total += current.pricing.totalPrice), 0)
+    return {
+      basket,
+      pricing: {
+        totalPrice,
+        label: priceLabel(totalPrice, basketDto.currency),
+      },
+    }
   }
 }
