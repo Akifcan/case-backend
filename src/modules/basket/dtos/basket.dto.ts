@@ -1,6 +1,7 @@
-import { IsNotEmpty, IsNumber, IsObject, IsOptional } from 'class-validator'
+import { IsNotEmpty, IsNumber, IsOptional } from 'class-validator'
+import { CurrencyDto } from '../../../shared/currency.dto'
 
-export class BasketDto {
+export class BasketDto extends CurrencyDto {
   @IsNotEmpty()
   @IsNumber()
   visitorId: number

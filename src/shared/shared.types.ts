@@ -11,3 +11,9 @@ export enum Currency {
   euro = 'euro',
   dollar = 'dollar',
 }
+
+export const currencySymbols: Record<CurrencyValue, string> = {
+  dollar: '$',
+  tl: '₺',
+  euro: '€',
+}

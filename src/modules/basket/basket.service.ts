@@ -6,11 +6,15 @@ import { BasketDto } from './dtos/basket.dto'
 import { User } from '../user/user.entity'
 import { I18nTranslations } from '../../generated/i18n.generated'
 import { I18nContext, I18nService } from 'nestjs-i18n'
+import { BasketTransformer } from './basket.transformer'
+import { Locale } from '../../shared/shared.types'
 
 @Injectable()
 export class BasketService {
   @InjectRepository(Basket) basketRepository: Repository<Basket>
+
   @Inject() i18n: I18nService<I18nTranslations>
+  @Inject() basketTransformer: BasketTransformer
 
   private getQuery(productId: number, basketDto: BasketDto, user?: User): FindOptionsWhere<Basket> {
     return !user
@@ -18,7 +22,7 @@ export class BasketService {
       : { product: { id: productId }, user: { id: user.id } }
   }
 
-  async addToBasket(productId: number, basketDto: BasketDto, user?: User) {
+  async updateBasket(productId: number, basketDto: BasketDto, user?: User) {
     const where = this.getQuery(productId, basketDto, user)
 
     const basket = await this.basketRepository.findOne({
@@ -57,5 +61,23 @@ export class BasketService {
     return {
       message: this.i18n.t('basket.removed', { lang: I18nContext.current()?.lang }),
     }
+  }
+
+  async basket(basketDto: BasketDto, user?: User) {
+    const where: FindOptionsWhere<Basket> = user
+      ? { user: { id: user.id } }
+      : { visitorId: basketDto.visitorId }
+
+    const list = await this.basketRepository.find({
+      select: { id: true, visitorId: true, quantity: true, product: { id: true } },
+      where,
+      relations: ['product'],
+    })
+
+    return this.basketTransformer.basketsToPublicEntity(
+      basketDto,
+      list,
+      I18nContext.current()?.lang as Locale,
+    )
   }
 }

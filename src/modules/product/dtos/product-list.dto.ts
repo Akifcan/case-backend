@@ -1,11 +1,7 @@
-import { IsIn, IsNotEmpty, IsOptional, Max, MaxLength } from 'class-validator'
-import { CurrencyValue } from '../../../shared/shared.types'
+import { IsOptional, MaxLength } from 'class-validator'
+import { CurrencyDto } from '../../../shared/currency.dto'
 
-export class ProductListDto {
-  @IsNotEmpty()
-  @IsIn(['tl', 'dollar', 'euro'])
-  currency: CurrencyValue
-
+export class ProductListDto extends CurrencyDto {
   @IsOptional()
   category?: string
 
