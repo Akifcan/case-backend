@@ -16,14 +16,22 @@ export class BasketService {
   @Inject() i18n: I18nService<I18nTranslations>
   @Inject() basketTransformer: BasketTransformer
 
-  private getQuery(productId: number, basketDto: BasketDto, user?: User): FindOptionsWhere<Basket> {
+  private getQueryForUpdateBasket(
+    productId: number,
+    basketDto: BasketDto,
+    user?: User,
+  ): FindOptionsWhere<Basket> {
     return !user
       ? { product: { id: productId }, visitorId: basketDto.visitorId }
       : { product: { id: productId }, user: { id: user.id } }
   }
 
+  private getQueryForListBasket(basketDto: BasketDto, user?: User): FindOptionsWhere<Basket> {
+    return user ? { user: { id: user.id } } : { visitorId: basketDto.visitorId }
+  }
+
   async updateBasket(productId: number, basketDto: BasketDto, user?: User) {
-    const where = this.getQuery(productId, basketDto, user)
+    const where = this.getQueryForUpdateBasket(productId, basketDto, user)
 
     const basket = await this.basketRepository.findOne({
       where,
@@ -51,7 +59,7 @@ export class BasketService {
   }
 
   async removeFromBasket(productId: number, basketDto: BasketDto, user?: User) {
-    const where = this.getQuery(productId, basketDto, user)
+    const where = this.getQueryForUpdateBasket(productId, basketDto, user)
     const result = await this.basketRepository.delete(where)
     if (!result.affected) {
       throw new NotFoundException({
@@ -63,10 +71,16 @@ export class BasketService {
     }
   }
 
+  async basketCount(basketDto: BasketDto, user?: User) {
+    const where = this.getQueryForListBasket(basketDto, user)
+    const count = await this.basketRepository.count({ where })
+    return {
+      totalItem: count,
+    }
+  }
+
   async basket(basketDto: BasketDto, user?: User) {
-    const where: FindOptionsWhere<Basket> = user
-      ? { user: { id: user.id } }
-      : { visitorId: basketDto.visitorId }
+    const where = this.getQueryForListBasket(basketDto, user)
 
     const list = await this.basketRepository.find({
       select: { id: true, visitorId: true, quantity: true, product: { id: true } },

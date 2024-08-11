@@ -10,6 +10,18 @@ export class BasketController {
   @Inject() basketService: BasketService
 
   @Public()
+  @Post()
+  basket(@Body() basketDto: BasketDto, @CurrentUser() user: User) {
+    return this.basketService.basket(basketDto, user)
+  }
+
+  @Public()
+  @Post('count')
+  basketCount(@Body() basketDto: BasketDto, @CurrentUser() user: User) {
+    return this.basketService.basketCount(basketDto, user)
+  }
+
+  @Public()
   @Post(':productId')
   updateBasket(
     @Param('productId') productId: number,
@@ -17,12 +29,6 @@ export class BasketController {
     @CurrentUser() user: User,
   ) {
     return this.basketService.updateBasket(productId, basketDto, user)
-  }
-
-  @Public()
-  @Post()
-  basket(@Body() basketDto: BasketDto, @CurrentUser() user: User) {
-    return this.basketService.basket(basketDto, user)
   }
 
   @Public()
