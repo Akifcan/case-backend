@@ -9,6 +9,10 @@ export type I18nTranslations = {
         "userExists": string;
         "userNotFound": string;
     };
+    "basket": {
+        "added": string;
+        "updated": string;
+    };
 };
 /* prettier-ignore */
 export type I18nPath = Path<I18nTranslations>;
