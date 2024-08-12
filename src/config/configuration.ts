@@ -22,4 +22,8 @@ export default () => ({
     limit: parseInt(process.env.RATE_LIMIT),
     ttl: parseInt(process.env.RATE_LIMITER_TTL),
   },
+  commentService: {
+    host: process.env.COMMENT_SERVICE_HOST,
+    port: parseInt(process.env.COMMENT_SERVICE_PORT),
+  },
 })
