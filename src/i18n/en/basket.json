@@ -1,5 +1,7 @@
 {
     "added": "Added to basket",
     "updated": "Updated basket",
-    "removed": "This item removed from basket"
+    "removed": "This item removed from basket",
+    "empty": "Emptied this basket",
+    "error": "An unexcepted error occured while empyting basket"
 }

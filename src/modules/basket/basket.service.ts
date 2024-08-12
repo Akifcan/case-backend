@@ -108,6 +108,11 @@ export class BasketService {
 
   async emptyBasket(emptyBasketDto: EmptyBasketDto, user?: User) {
     const where = user ? { user: { id: user.id } } : { visitorId: emptyBasketDto.visitorId }
-    return await this.basketRepository.delete(where)
+    const result = await this.basketRepository.delete(where)
+    if (result.affected) {
+      return { empty: true, message: this.i18n.t('basket.empty', { lang: I18nContext.current()?.lang }) }
+    } else {
+      return { empty: false, message: this.i18n.t('basket.error', { lang: I18nContext.current()?.lang }) }
+    }
   }
 }

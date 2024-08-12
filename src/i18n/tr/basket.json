@@ -1,5 +1,7 @@
 {
     "added": "Sepete eklendi",
     "updated": "Sepet güncellendi",
-    "removed": "This item removed from basket"
+    "removed": "This item removed from basket",
+    "empty": "Sepetiniz temizlendi",
+    "error": "Sepetinizi temizlerken beklenmedik bir hata oluştu"
 }

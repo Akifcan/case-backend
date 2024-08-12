@@ -13,6 +13,8 @@ export type I18nTranslations = {
         "added": string;
         "updated": string;
         "removed": string;
+        "empty": string;
+        "error": string;
     };
     "user": {
         "updated": string;
