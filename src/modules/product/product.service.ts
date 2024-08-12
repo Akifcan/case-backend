@@ -10,8 +10,10 @@ import { ProductQueryDto } from './dtos/product-query.dto'
 import { CategoryI18n } from '../category/category-i18n.entity'
 import { CACHE_MANAGER } from '@nestjs/cache-manager'
 import { Cache } from 'cache-manager'
+import { Product } from './entities/product.entity'
 @Injectable()
 export class ProductService {
+  @InjectRepository(Product) productRepository: Repository<Product>
   @InjectRepository(ProductI18n) productI18nRepository: Repository<ProductI18n>
   @InjectRepository(CategoryI18n) categoryI18nRepository: Repository<CategoryI18n>
   @Inject() productTransformer: ProductTransformer
@@ -42,11 +44,12 @@ export class ProductService {
     const skip: number = (productQueryDto.page - 1) * productQueryDto.limit
 
     const products = await this.productI18nRepository.find({
-      select: { id: true, name: true, description: true, slug: true, product: { id: true } },
+      select: { id: true, name: true, description: true, slug: true, product: { id: true }, createdAt: true },
       relations: ['product'],
       where: whereQuery,
       skip,
       take: productQueryDto.limit,
+      order: { createdAt: 'DESC' },
     })
 
     const productCount = await this.productI18nRepository.count({
@@ -89,5 +92,16 @@ export class ProductService {
       relations: ['category'],
     })
     return category?.category?.id
+  }
+
+  async toggleRemoveProduct(productId: number) {
+    const product = await this.productI18nRepository.findOne({
+      withDeleted: true,
+      where: { product: { id: productId } },
+    })
+    if (product?.deletedAt) {
+      return await this.productI18nRepository.update({ product: { id: productId } }, { deletedAt: null })
+    }
+    return await this.productI18nRepository.softDelete({ product: { id: productId } })
   }
 }

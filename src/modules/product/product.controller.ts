@@ -1,8 +1,21 @@
-import { Body, Controller, Headers, Inject, Logger, Param, Post, Query, Req } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  Delete,
+  Headers,
+  Inject,
+  Logger,
+  Param,
+  Post,
+  Query,
+  Req,
+  UseGuards,
+} from '@nestjs/common'
 import { ProductService } from './product.service'
 import { ProductListDto } from './dtos/product-list.dto'
 import { Public } from '../../decorators/is-public.decorator'
 import { ProductQueryDto } from './dtos/product-query.dto'
+import { RoleGuard } from '../auth/role.guard'
 
 @Controller('product')
 export class ProductController {
@@ -26,5 +39,11 @@ export class ProductController {
     const cacheKey = req.url + JSON.stringify(productListDto) + slug.toString()
 
     return this.productService.product(slug, productListDto, cacheKey)
+  }
+
+  @UseGuards(RoleGuard)
+  @Delete(':productId')
+  deleteProduct(@Param('productId') productId: number) {
+    return this.productService.toggleRemoveProduct(productId)
   }
 }
