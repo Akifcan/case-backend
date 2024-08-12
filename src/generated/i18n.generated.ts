@@ -14,6 +14,10 @@ export type I18nTranslations = {
         "updated": string;
         "removed": string;
     };
+    "user": {
+        "updated": string;
+        "sameRecord": string;
+    };
 };
 /* prettier-ignore */
 export type I18nPath = Path<I18nTranslations>;
