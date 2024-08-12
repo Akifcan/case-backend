@@ -8,3 +8,11 @@ services:
       POSTGRES_USER: case_user
       POSTGRES_DB: case_db
     container_name: db_case
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - '6379:6379'
+    environment:
+      - REDIS_PORT=6379
+      - REDIS_DATABASES=16

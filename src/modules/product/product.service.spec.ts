@@ -27,6 +27,7 @@ describe('ProductService', () => {
         page: 1,
         limit: 5,
       },
+      Math.floor(Math.random()).toString(),
     )
     expect(Array.isArray(result.products)).toBe(true)
     const obj = result.products[0]
@@ -52,6 +53,7 @@ describe('ProductService', () => {
         page: 1,
         limit,
       },
+      Math.floor(Math.random()).toString(),
     )
     expect(Array.isArray(result.products)).toBe(true)
     expect(result.products.length).toBeLessThanOrEqual(limit)
@@ -61,9 +63,13 @@ describe('ProductService', () => {
     // NOTE MAKE SURE YOU RUN THE SEEDER BEFORE RUN THIS TEST!
     const slug = 'nike-blue-shoe'
 
-    const result = await service.product(slug, {
-      currency: 'tl',
-    })
+    const result = await service.product(
+      slug,
+      {
+        currency: 'tl',
+      },
+      Math.floor(Math.random()).toString(),
+    )
     const product = result.product
     expect(product).toHaveProperty('id')
     expect(product).toHaveProperty('name')
@@ -79,9 +85,13 @@ describe('ProductService', () => {
     const slug = 'nike-blue-shoeasdfadsf'
 
     try {
-      await service.product(slug, {
-        currency: 'tl',
-      })
+      await service.product(
+        slug,
+        {
+          currency: 'tl',
+        },
+        Math.floor(Math.random()).toString(),
+      )
       expect(true).toBe(false)
     } catch (e) {
       expect(e.response.error_code).toBe('product.not_found')

@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common'
 import { UserModule } from './modules/user/user.module'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule, ConfigService } from '@nestjs/config'
-import { AppConfig, DbConfig, JwtProps } from './config/config.interface'
+import { AppConfig, DbConfig, JwtProps, RedisConfig } from './config/config.interface'
 import { AuthModule } from './modules/auth/auth.module'
 import { ProductModule } from './modules/product/product.module'
 import { APP_GUARD } from '@nestjs/core'
@@ -14,9 +14,30 @@ import configuration from './config/configuration'
 import { join } from 'path'
 import { SeedModule } from './seed/seed.module'
 import { BasketModule } from './modules/basket/basket.module'
+import { CacheModule } from '@nestjs/cache-manager'
+import { redisStore } from 'cache-manager-redis-store'
+import { CacheModuleAsyncOptions } from '@nestjs/cache-manager'
 
 @Module({
   imports: [
+    CacheModule.registerAsync({
+      isGlobal: true,
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService): Promise<CacheModuleAsyncOptions> => {
+        const redisConfig = configService.get<RedisConfig>('redis')
+        const store = await redisStore({
+          ttl: redisConfig.ttl,
+          socket: {
+            host: redisConfig.host,
+            port: redisConfig.port,
+          },
+        })
+        return {
+          store: () => store,
+        } as any
+      },
+      inject: [ConfigService],
+    }),
     ConfigModule.forRoot({ isGlobal: true, load: [configuration] }),
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],

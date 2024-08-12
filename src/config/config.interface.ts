@@ -15,3 +15,9 @@ export interface JwtProps {
   secret: string
   expires: string
 }
+
+export interface RedisConfig {
+  host: string
+  port: number
+  ttl: number
+}

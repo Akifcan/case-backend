@@ -13,4 +13,9 @@ export default () => ({
     secret: process.env.JWT_SECRET,
     expires: process.env.JWT_EXPIRES_IN,
   },
+  redis: {
+    host: process.env.REDIS_HOST,
+    ttl: parseInt(process.env.REDIS_TTL),
+    port: parseInt(process.env.REDIS_PORT) || 6379,
+  },
 })

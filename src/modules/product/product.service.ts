@@ -1,4 +1,4 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common'
+import { Inject, Injectable, Logger, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { FindOptionsWhere, ILike, Repository } from 'typeorm'
 import { ProductI18n } from './entities/product-i18n.entity'
@@ -8,17 +8,28 @@ import { ProductTransformer } from './product.transformer'
 import { ProductListDto } from './dtos/product-list.dto'
 import { ProductQueryDto } from './dtos/product-query.dto'
 import { CategoryI18n } from '../category/category-i18n.entity'
-
+import { CACHE_MANAGER } from '@nestjs/cache-manager'
+import { Cache } from 'cache-manager'
 @Injectable()
 export class ProductService {
   @InjectRepository(ProductI18n) productI18nRepository: Repository<ProductI18n>
   @InjectRepository(CategoryI18n) categoryI18nRepository: Repository<CategoryI18n>
-
   @Inject() productTransformer: ProductTransformer
+  @Inject(CACHE_MANAGER) cacheManager: Cache
 
-  async products(productListDto: ProductListDto, productQueryDto: ProductQueryDto) {
+  private async useCache<T>(cacheKey: string) {
+    const cache = await this.cacheManager.get<any>(cacheKey)
+
+    if (cache) {
+      Logger.log('from redis', 'REDIS')
+      return JSON.parse(cache) as T
+    }
+  }
+
+  async products(productListDto: ProductListDto, productQueryDto: ProductQueryDto, cacheKey: string) {
+    await this.useCache(cacheKey)
+
     let categoryId: number | undefined = undefined
-
     if (productListDto.category) {
       categoryId = await this.getCategoryId(productListDto.category)
     }
@@ -42,13 +53,17 @@ export class ProductService {
       where: whereQuery,
     })
 
-    return {
+    const response = {
       products: await this.productTransformer.productsToPublicEntity(products, productListDto),
       totalPage: Math.ceil(productCount / productQueryDto.limit),
     }
+    this.cacheManager.set(cacheKey, JSON.stringify(response), 10)
+    return response
   }
 
-  async product(slug: string, productListDto: ProductListDto) {
+  async product(slug: string, productListDto: ProductListDto, cacheKey: string) {
+    await this.useCache(cacheKey)
+
     const product = await this.productI18nRepository.findOne({
       select: { id: true, name: true, description: true, slug: true, product: { id: true } },
       relations: ['product'],
@@ -60,10 +75,11 @@ export class ProductService {
         error_code: 'product.not_found',
       })
     }
-
-    return {
+    const response = {
       product: await this.productTransformer.productToPublicEntity(product, productListDto),
     }
+    this.cacheManager.set(cacheKey, JSON.stringify(response), 10)
+    return response
   }
 
   private async getCategoryId(categorySlug: string): Promise<number | undefined> {
