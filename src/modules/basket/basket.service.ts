@@ -8,10 +8,13 @@ import { I18nTranslations } from '../../generated/i18n.generated'
 import { I18nContext, I18nService } from 'nestjs-i18n'
 import { BasketTransformer } from './basket.transformer'
 import { Locale } from '../../shared/shared.types'
+import { Product } from '../product/entities/product.entity'
+import { EmptyBasketDto } from './dtos/empty-basket.dto'
 
 @Injectable()
 export class BasketService {
   @InjectRepository(Basket) basketRepository: Repository<Basket>
+  @InjectRepository(Product) productRepository: Repository<Product>
 
   @Inject() i18n: I18nService<I18nTranslations>
   @Inject() basketTransformer: BasketTransformer
@@ -31,7 +34,15 @@ export class BasketService {
   }
 
   async updateBasket(productId: number, basketDto: BasketDto, user?: User) {
-    const where = this.getQueryForUpdateBasket(productId, basketDto, user)
+    const product = await this.productRepository.findOne({ where: { id: productId } })
+
+    if (!product) {
+      throw new NotFoundException({
+        error_code: 'basket.product_not_found',
+      })
+    }
+
+    const where = this.getQueryForUpdateBasket(product.id, basketDto, user)
 
     const basket = await this.basketRepository.findOne({
       where,
@@ -39,7 +50,7 @@ export class BasketService {
     if (!basket) {
       await this.basketRepository.save(
         this.basketRepository.create({
-          product: { id: productId },
+          product: { id: product.id },
           visitorId: !user ? basketDto.visitorId : undefined,
           user: user ? { id: user.id } : undefined,
           quantity: 1,
@@ -93,5 +104,10 @@ export class BasketService {
       list,
       I18nContext.current()?.lang as Locale,
     )
+  }
+
+  async emptyBasket(emptyBasketDto: EmptyBasketDto, user?: User) {
+    const where = user ? { user: { id: user.id } } : { visitorId: emptyBasketDto.visitorId }
+    return await this.basketRepository.delete(where)
   }
 }

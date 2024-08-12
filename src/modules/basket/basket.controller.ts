@@ -4,6 +4,7 @@ import { BasketDto } from './dtos/basket.dto'
 import { CurrentUser } from '../../decorators/current-user.decorator'
 import { User } from '../user/user.entity'
 import { BasketService } from './basket.service'
+import { EmptyBasketDto } from './dtos/empty-basket.dto'
 
 @Controller('basket')
 export class BasketController {
@@ -29,6 +30,12 @@ export class BasketController {
     @CurrentUser() user: User,
   ) {
     return this.basketService.updateBasket(productId, basketDto, user)
+  }
+
+  @Public()
+  @Delete('empty')
+  emptyBasket(@Body() emptyBasketDto: EmptyBasketDto, @CurrentUser() user: User) {
+    return this.basketService.emptyBasket(emptyBasketDto, user)
   }
 
   @Public()

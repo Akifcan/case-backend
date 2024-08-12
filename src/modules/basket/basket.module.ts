@@ -7,9 +7,10 @@ import { BasketTransformer } from './basket.transformer'
 import { ProductI18n } from '../product/entities/product-i18n.entity'
 import { ProductImage } from '../product/entities/product-image.entity'
 import { ProductPricing } from '../product/entities/product-pricing.entity'
+import { Product } from '../product/entities/product.entity'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Basket, ProductI18n, ProductImage, ProductPricing])],
+  imports: [TypeOrmModule.forFeature([Product, Basket, ProductI18n, ProductImage, ProductPricing])],
   providers: [BasketService, BasketTransformer],
   controllers: [BasketController],
 })
