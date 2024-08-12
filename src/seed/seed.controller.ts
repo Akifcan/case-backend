@@ -294,7 +294,7 @@ export class SeedController {
         },
         {
           altTag: 'tshirt',
-          src: 'https://images.unsplash.com/photo-1574462282113-38aa607fec36?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YmxhY2slMjB0c2hpcnR8ZW58MHx8MHx8fDA%3D',
+          src: 'https://plus.unsplash.com/premium_photo-1688497831535-120bd47d9f9c?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YmxhY2slMjB0c2hpcnR8ZW58MHx8MHx8fDA%3D',
           product: product7,
         },
       ]),
