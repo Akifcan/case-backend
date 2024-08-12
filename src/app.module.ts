@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common'
 import { UserModule } from './modules/user/user.module'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule, ConfigService } from '@nestjs/config'
-import { AppConfig, DbConfig, JwtProps, RedisConfig } from './config/config.interface'
+import { AppConfig, DbConfig, JwtProps, RedisConfig, ThrottlerConfig } from './config/config.interface'
 import { AuthModule } from './modules/auth/auth.module'
 import { ProductModule } from './modules/product/product.module'
 import { APP_GUARD } from '@nestjs/core'
@@ -18,9 +18,27 @@ import { CacheModule } from '@nestjs/cache-manager'
 import { redisStore } from 'cache-manager-redis-store'
 import { CacheModuleAsyncOptions } from '@nestjs/cache-manager'
 import { CommentModule } from './modules/comment/comment.module'
+import { ServeStaticModule } from '@nestjs/serve-static'
+import { ThrottlerModule } from '@nestjs/throttler'
 
 @Module({
   imports: [
+    ThrottlerModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => {
+        const config = configService.get<ThrottlerConfig>('throttler')
+        return [
+          {
+            ttl: config.ttl,
+            limit: config.limit,
+          },
+        ]
+      },
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+    }),
     CacheModule.registerAsync({
       isGlobal: true,
       imports: [ConfigModule],

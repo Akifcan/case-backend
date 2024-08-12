@@ -21,3 +21,8 @@ export interface RedisConfig {
   port: number
   ttl: number
 }
+
+export interface ThrottlerConfig {
+  ttl: number
+  limit: number
+}

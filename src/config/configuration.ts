@@ -18,4 +18,8 @@ export default () => ({
     ttl: parseInt(process.env.REDIS_TTL),
     port: parseInt(process.env.REDIS_PORT) || 6379,
   },
+  throttler: {
+    limit: parseInt(process.env.RATE_LIMIT),
+    ttl: parseInt(process.env.RATE_LIMITER_TTL),
+  },
 })
