@@ -17,6 +17,7 @@ import { BasketModule } from './modules/basket/basket.module'
 import { CacheModule } from '@nestjs/cache-manager'
 import { redisStore } from 'cache-manager-redis-store'
 import { CacheModuleAsyncOptions } from '@nestjs/cache-manager'
+import { CommentModule } from './modules/comment/comment.module'
 
 @Module({
   imports: [
@@ -88,6 +89,7 @@ import { CacheModuleAsyncOptions } from '@nestjs/cache-manager'
     CategoryModule,
     SeedModule,
     BasketModule,
+    CommentModule,
   ],
   providers: [
     {

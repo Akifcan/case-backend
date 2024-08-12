@@ -887,6 +887,14 @@
     "@types/jsonwebtoken" "9.0.5"
     jsonwebtoken "9.0.2"
 
+"@nestjs/microservices@^10.4.0":
+  version "10.4.0"
+  resolved "https://registry.yarnpkg.com/@nestjs/microservices/-/microservices-10.4.0.tgz#9497b8b3f2cac6d3ed749b3194516a26cde88126"
+  integrity sha512-2Dfwk9c16N3ufSbKbRsy7CwOAseaEfaneEecGchYE1c++8uppIhPpfMZahdGaBLsps4xuwoTZKUR+wo3NbIMSw==
+  dependencies:
+    iterare "1.2.1"
+    tslib "2.6.3"
+
 "@nestjs/platform-express@^10.0.0":
   version "10.3.10"
   resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-10.3.10.tgz#45fa006605913d5aaa31bf99073136ad639939b4"
