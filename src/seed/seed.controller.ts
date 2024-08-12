@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common'
+import { Controller, Get, Logger } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Category } from '../modules/category/category.entity'
 import { User } from '../modules/user/user.entity'
@@ -11,6 +11,9 @@ import { ProductI18n } from '../modules/product/entities/product-i18n.entity'
 import { ProductImage } from '../modules/product/entities/product-image.entity'
 import { ProductPricing } from '../modules/product/entities/product-pricing.entity'
 import { Public } from '../decorators/is-public.decorator'
+import { open } from 'fs/promises'
+import { join } from 'path'
+import { Comment } from '../modules/comment/entities/comment.entity'
 
 @Controller('seed')
 export class SeedController {
@@ -21,6 +24,7 @@ export class SeedController {
   @InjectRepository(ProductI18n) productI18nRepository: Repository<ProductI18n>
   @InjectRepository(ProductImage) productImageRepository: Repository<ProductImage>
   @InjectRepository(ProductPricing) productPriceRepository: Repository<ProductPricing>
+  @InjectRepository(Comment) commentRepository: Repository<Comment>
 
   @Public()
   @Get()
@@ -432,5 +436,52 @@ export class SeedController {
     )
 
     return 'ok'
+  }
+
+  @Public()
+  @Get('external-comment-merge')
+  async externalComment() {
+    /*
+
+      PLEASE READ THIS:
+
+      - Let's say we have a large file import and need to import the db.
+      - This file is large and we need to avoid memory overload/memory pressure.
+      - For avoiding memory pressure we'll fetch the data chunk by chunk. 
+      - In this case highWaterMark: 50
+
+    */
+
+    await this.commentRepository.delete({})
+    const fileHandleRead = await open(join(__dirname, '../', '../public', 'external-comment-mock.txt'), 'r')
+    const streamRead = fileHandleRead.createReadStream({ highWaterMark: 50, encoding: 'utf-8' })
+
+    let data = ''
+
+    streamRead.on('data', (chunk) => {
+      data += chunk.toString('utf-8')
+    })
+
+    streamRead.on('end', async () => {
+      streamRead.removeAllListeners()
+      const parsed = JSON.parse(JSON.parse(data))
+      for await (const x of parsed) {
+        const product = await this.productI18nRepository.findOne({
+          relations: ['product'],
+          select: { id: true, product: { id: true } },
+          where: { slug: x.productSlug },
+        })
+        await this.commentRepository.save(
+          this.commentRepository.create({
+            content: x.content,
+            product: { id: product.product.id },
+            locale: x.locale,
+          }),
+        )
+      }
+      Logger.log('DONE', 'Merge comment')
+    })
+
+    return { message: 'started' }
   }
 }

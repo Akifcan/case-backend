@@ -8,6 +8,7 @@ import { Product } from '../modules/product/entities/product.entity'
 import { ProductI18n } from '../modules/product/entities/product-i18n.entity'
 import { ProductImage } from '../modules/product/entities/product-image.entity'
 import { ProductPricing } from '../modules/product/entities/product-pricing.entity'
+import { Comment } from '../modules/comment/entities/comment.entity'
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ProductPricing } from '../modules/product/entities/product-pricing.enti
       ProductI18n,
       ProductImage,
       ProductPricing,
+      Comment,
     ]),
   ],
   controllers: [SeedController],
