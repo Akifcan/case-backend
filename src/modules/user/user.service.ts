@@ -20,10 +20,16 @@ export class UserService {
   }
 
   async updateUser(user: User, updateUserDto: UpdateUserDto) {
-    const currentUser = await this.userRepsitory.findOneOrFail({
+    const currentUser = await this.userRepsitory.findOne({
       select: { name: true },
       where: { id: user.id },
     })
+
+    if (!currentUser) {
+      throw new NotFoundException({
+        error_code: 'user.not_found',
+      })
+    }
 
     if (currentUser.name === updateUserDto.name) {
       return { message: this.i18n.t('user.sameRecord') }
