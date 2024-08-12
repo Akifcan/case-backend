@@ -2,7 +2,7 @@ import { Inject, Injectable, Logger, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { FindOptionsWhere, ILike, Repository } from 'typeorm'
 import { ProductI18n } from './entities/product-i18n.entity'
-import { I18nContext } from 'nestjs-i18n'
+import { I18nContext, I18nService } from 'nestjs-i18n'
 import { Locale } from '../../shared/shared.types'
 import { ProductTransformer } from './product.transformer'
 import { ProductListDto } from './dtos/product-list.dto'
@@ -11,11 +11,14 @@ import { CategoryI18n } from '../category/category-i18n.entity'
 import { CACHE_MANAGER } from '@nestjs/cache-manager'
 import { Cache } from 'cache-manager'
 import { Product } from './entities/product.entity'
+import { I18nTranslations } from '../../generated/i18n.generated'
 @Injectable()
 export class ProductService {
   @InjectRepository(Product) productRepository: Repository<Product>
   @InjectRepository(ProductI18n) productI18nRepository: Repository<ProductI18n>
   @InjectRepository(CategoryI18n) categoryI18nRepository: Repository<CategoryI18n>
+
+  @Inject() i18n: I18nService<I18nTranslations>
   @Inject() productTransformer: ProductTransformer
   @Inject(CACHE_MANAGER) cacheManager: Cache
 
@@ -100,8 +103,14 @@ export class ProductService {
       where: { product: { id: productId } },
     })
     if (product?.deletedAt) {
-      return await this.productI18nRepository.update({ product: { id: productId } }, { deletedAt: null })
+      await this.productI18nRepository.update({ product: { id: productId } }, { deletedAt: null })
+      return {
+        message: this.i18n.t('product.admin.activated', { lang: I18nContext.current()?.lang }),
+      }
     }
-    return await this.productI18nRepository.softDelete({ product: { id: productId } })
+    await this.productI18nRepository.softDelete({ product: { id: productId } })
+    return {
+      message: this.i18n.t('product.admin.removed', { lang: I18nContext.current()?.lang }),
+    }
   }
 }

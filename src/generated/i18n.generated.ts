@@ -16,6 +16,12 @@ export type I18nTranslations = {
         "empty": string;
         "error": string;
     };
+    "product": {
+        "admin": {
+            "removed": string;
+            "activated": string;
+        };
+    };
     "user": {
         "updated": string;
         "sameRecord": string;

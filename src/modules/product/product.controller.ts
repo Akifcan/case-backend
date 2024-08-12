@@ -44,6 +44,7 @@ export class ProductController {
   @UseGuards(RoleGuard)
   @Delete(':productId')
   deleteProduct(@Param('productId') productId: number) {
+    console.log('ok')
     return this.productService.toggleRemoveProduct(productId)
   }
 }
