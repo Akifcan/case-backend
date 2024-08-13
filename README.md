@@ -114,7 +114,7 @@
 - `localhost:3000/seed/external-comment-merge`
 - Please read this comment lines: https://github.com/Akifcan/case-backend/blob/93160f4671059e1d6d25a13a187584f034531fcd/src/seed/seed.controller.ts#L446
 
-- Postman Collection: [ADD HERE]
+- Postman Collection: **https://github.com/Akifcan/case-backend/blob/main/case.postman_collection.json**
 
 - ## Tests
 - # Please run seeder before the tests.
