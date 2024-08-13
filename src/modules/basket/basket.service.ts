@@ -29,8 +29,11 @@ export class BasketService {
       : { product: { id: productId }, user: { id: user.id } }
   }
 
-  private getQueryForListBasket(basketDto: BasketDto, user?: User): FindOptionsWhere<Basket> {
-    return user ? { user: { id: user.id } } : { visitorId: basketDto.visitorId }
+  private getQueryForListBasket(
+    basketDto: BasketDto,
+    user?: User,
+  ): FindOptionsWhere<Basket> | FindOptionsWhere<Basket>[] {
+    return [{ user: { id: user?.id } }, { visitorId: basketDto.visitorId }]
   }
 
   async updateBasket(productId: number, basketDto: BasketDto, user?: User) {
