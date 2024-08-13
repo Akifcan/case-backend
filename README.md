@@ -1,73 +1,144 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# README
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Server
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- Backend Server URL: **http://139.59.210.72:3004**
+- Backend Comment Microservice URL: **http://139.59.210.72:3005**
+- Web App URL: 
 
 ## Installation
 
-```bash
-$ yarn install
+## Case Comment Microservice
+
+- Docker 
+  - Run docker file first inside the **docker** folder.
+  - `docker compose up -d`
+
+- Set up .env file.
+  - create **.env** file in the root folder.
+  - **.env** file should look like this.
+  ```
+  # DB_NAME=case_db
+  # DB_USER=case_user
+  # DB_PASSWORD=case_password
+  # DB_PORT=5432
+  # DB_HOST=localhost
+
+  DB_NAME=postgres
+  DB_USER=postgres.kgoxitgoblfsqshfufge
+  DB_PASSWORD=QGj5k2olkRqpGvNL
+  DB_PORT=6543
+  DB_HOST=aws-0-eu-central-1.pooler.supabase.com
+
+  APP_PORT=3002
+
+  JWT_SECRET=af5++23dxsFFsx
+  #JWT_EXPIRES_IN=60s
+  JWT_EXPIRES_IN=1d
+
+  FALLBACK_LANGUAGE=en
+
+  REDIS_PORT=6379
+  REDIS_HOST=127.0.0.1
+  REDIS_TTL=10
+
+  RATE_LIMITER_TTL=60000
+  RATE_LIMIT=10
+
+  COMMENT_SERVICE_PORT=3002
+  COMMENT_SERVICE_HOST=localhost```
+
+---
+
+-  ## Run the service
+
+ - `yarn install`
+ - `yarn start:dev` 
+
+- ## Tests
+ - `yarn test`
+
+- ## Please run the seeder before execute the tests.
+
+
+## Case Backend
+
+- Docker 
+  - Run docker file first inside the **docker** folder.
+  - `docker compose up -d`
+
+- Set up .env file.
+  - create **.env** file in the root folder.
+  - **.env** file should look like this.
+  ```
+    # DB_NAME=case_db
+    # DB_USER=case_user
+    # DB_PASSWORD=case_password
+    # DB_PORT=5432
+    # DB_HOST=localhost
+
+    DB_NAME=postgres
+    DB_USER=postgres.kgoxitgoblfsqshfufge
+    DB_PASSWORD=QGj5k2olkRqpGvNL
+    DB_PORT=6543
+    DB_HOST=aws-0-eu-central-1.pooler.supabase.com
+
+    APP_PORT=3000
+
+    JWT_SECRET=af5++23dxsFFsx
+    #JWT_EXPIRES_IN=60s
+    JWT_EXPIRES_IN=1d
+
+    FALLBACK_LANGUAGE=en
+
+    REDIS_PORT=6379
+    REDIS_HOST=127.0.0.1
+    REDIS_TTL=10
+
+    RATE_LIMITER_TTL=60000
+    RATE_LIMIT=10
+
+    COMMENT_SERVICE_PORT=3002
+    COMMENT_SERVICE_HOST=localhost
+
+    HEALTHCHECK_URI=http://localhost:3000/health```
+
+  
+ - `yarn install`
+ - `yarn start:dev` 
+
+- ## Seeder (IMPORTANT)
+
+- Please run these endpoints before use the app.
+- `localhost:3000/seed`
+- `localhost:3000/seed/external-comment-merge`
+- Please read this comment lines: https://github.com/Akifcan/case-backend/blob/93160f4671059e1d6d25a13a187584f034531fcd/src/seed/seed.controller.ts#L446
+
+- Postman Collection: [ADD HERE]
+
+- ## Tests
+- # Please run seeder before the tests.
+- `yarn test`
+- `yarn test:2e`
+
+
+---
+
+# Next App
+
+- # Please run seeder before the run web app.
+
+- ## .env file
+
+```
+NEXT_PUBLIC_API_URL=http://localhost:3000
 ```
 
-## Running the app
+- ## Setup
 
-```bash
-# development
-$ yarn run start
+- `yarn install`
+- `yarn dev --port 3001` 
 
-# watch mode
-$ yarn run start:dev
+- ## Tests
 
-# production mode
-$ yarn run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- `yarn cy:open`

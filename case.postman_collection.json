@@ -1,0 +1,1980 @@
+{
+	"info": {
+		"_postman_id": "afe77a7e-e3f0-4f6d-8977-2743adc3967f",
+		"name": "case",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30183977"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-lang",
+								"value": "tr",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "/*{\n    \"email\": \"akifcannnn@icloud.com\",\n    \"password\": \"test123A%\"\n}*/\n\n{\n    \"email\": \"johndoe@mail.com\",\n    \"password\": \"test123A%\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "expected",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-lang",
+										"value": "tr",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"akifcannnn@icloud.comc\",\n    \"password\": \"test123A%\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/auth/login",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "333"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"14d-DsoXwY27zd8rEufEPnAo4Ktohd4\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 08 Aug 2024 22:55:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"id\": 7,\n        \"name\": \"akifcan\",\n        \"email\": \"akifcannnn@icloud.comc\",\n        \"role\": \"User\"\n    },\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo3LCJuYW1lIjoiYWtpZmNhbiIsImVtYWlsIjoiYWtpZmNhbm5ubkBpY2xvdWQuY29tYyIsInJvbGUiOiJVc2VyIn0sImlhdCI6MTcyMzE1NzcwMCwiZXhwIjoxNzIzMTU3NzYwfQ.9HAB_BnQ1ag_M0_YQKW_iniLJwUL6qh0o-XHlNYkIXU\"\n}"
+						},
+						{
+							"name": "validation error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-lang",
+										"value": "tr",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"\",\n    \"password\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/auth/login",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "209"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d1-PPmr8r8zPVTbI7hZpyvkXN0E10s\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 09 Aug 2024 00:01:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": [\n        \"email should not be empty\",\n        \"password must match /^(?=.*\\\\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/ regular expression\",\n        \"password should not be empty\"\n    ],\n    \"error\": \"Bad Request\",\n    \"statusCode\": 400\n}"
+						}
+					]
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-lang",
+								"value": "tr",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"akifcannnn@icloud.comc4\",\n    \"password\": \"123Aasdf%\",\n    \"name\": \"akif\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "expected",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-lang",
+										"value": "en",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"test@mail.com\",\n    \"password\": \"asdfadsf123A%\",\n    \"name\": \"akif\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/auth/register",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "307"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"133-LITYMnyhswg3yY8QIwGM462Hcac\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 09 Aug 2024 00:02:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"name\": \"akif\",\n        \"email\": \"test@mail.com\",\n        \"id\": 27,\n        \"role\": \"User\"\n    },\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJha2lmIiwiZW1haWwiOiJ0ZXN0QG1haWwuY29tIiwiaWQiOjI3LCJyb2xlIjoiVXNlciJ9LCJpYXQiOjE3MjMxNjE3MjgsImV4cCI6MTcyMzE2MTc4OH0.VgyeJ10d4juU333JMsZ-o8TXTKrqIkNJfkNdtyGITgI\"\n}"
+						},
+						{
+							"name": "validation error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-lang",
+										"value": "en",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"\",\n    \"password\": \"\",\n    \"name\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/auth/register",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "236"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ec-3LbkqXlgA3ky0f/C0Y+n9VQwJmA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 09 Aug 2024 00:04:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": [\n        \"name should not be empty\",\n        \"email should not be empty\",\n        \"password must match /^(?=.*\\\\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/ regular expression\",\n        \"password should not be empty\"\n    ],\n    \"error\": \"Bad Request\",\n    \"statusCode\": 400\n}"
+						},
+						{
+							"name": "if email exists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-lang",
+										"value": "en",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"test@mail.com\",\n    \"password\": \"123Aasdf%\",\n    \"name\": \"akif\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/auth/register",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "73"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"49-oOe/qqTbvHI3tejuF52iLrVsjh0\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 09 Aug 2024 00:05:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"This user already exists\",\n    \"error_code\": \"auth.already_exists\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "categories",
+			"item": [
+				{
+					"name": "List all categories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo3LCJuYW1lIjoiYWtpZmNhbiIsImVtYWlsIjoiYWtpZmNhbm5ubkBpY2xvdWQuY29tYyIsInJvbGUiOiJVc2VyIn0sImlhdCI6MTcyMzE1ODk3NiwiZXhwIjoxNzIzMTU5MDM2fQ.O7jd99Tgn0GISQapuSKNU5maUZ6I6Zj2uCf4GypfACs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-lang",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/category",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List all categories",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-lang",
+										"value": "en",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost:3000/category",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"category"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "110"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"6e-Q8EHkXiD4SEMtQP0DoOx6PvySp0\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 09 Aug 2024 22:46:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"name\": \"Shoes\",\n        \"slug\": \"shoes\",\n        \"category\": {\n            \"id\": 1\n        }\n    },\n    {\n        \"name\": \"T-shirts\",\n        \"slug\": \"tshirts\",\n        \"category\": {\n            \"id\": 2\n        }\n    }\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "list all products",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-lang",
+								"value": "en",
+								"type": "text"
+							},
+							{
+								"key": "x-currency",
+								"value": "tl",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"currency\": \"tl\"\n    // \"category\": \"tistortler\",\n    //\"keyword\": \"nike\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/product?page=1&limit=5",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"product"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "list all products",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-lang",
+										"value": "en",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"currency\": \"tl\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/product?page=1&limit=5",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"product"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "3788"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ecc-PWm/Nk++7EoSbDTVKlZ1BBNQbHM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 10 Aug 2024 00:36:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"products\": [\n        {\n            \"id\": 12,\n            \"name\": \"Nike Blue Shoe\",\n            \"description\": \"Good blue shoe\",\n            \"product\": {\n                \"id\": 1\n            },\n            \"price\": \"300\",\n            \"discountPrice\": \"100\",\n            \"currency\": \"tl\",\n            \"images\": [\n                {\n                    \"altTag\": \"nike\",\n                    \"src\": \"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bmlrZSUyMHJlZCUyMHNob2V8ZW58MHx8MHx8fDA%3D\",\n                    \"product\": {\n                        \"id\": 1,\n                        \"createdAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"updatedAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"deletedAt\": null\n                    }\n                },\n                {\n                    \"altTag\": \"nike\",\n                    \"src\": \"https://images.unsplash.com/photo-1474494819794-90f9664b530d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bmlrZSUyMHJlZCUyMHNob2V8ZW58MHx8MHx8fDA%3D\",\n                    \"product\": {\n                        \"id\": 1,\n                        \"createdAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"updatedAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"deletedAt\": null\n                    }\n                }\n            ]\n        },\n        {\n            \"id\": 18,\n            \"name\": \"Adidas Red Shoe\",\n            \"description\": \"Adidas red shoe good\",\n            \"product\": {\n                \"id\": 2\n            },\n            \"price\": \"100\",\n            \"discountPrice\": \"53\",\n            \"currency\": \"tl\",\n            \"images\": [\n                {\n                    \"altTag\": \"adidas\",\n                    \"src\": \"https://images.unsplash.com/photo-1520256862855-398228c41684?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YWRpZGFzJTIwYmx1ZSUyMHNob2V8ZW58MHx8MHx8fDA%3D\",\n                    \"product\": {\n                        \"id\": 2,\n                        \"createdAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"updatedAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"deletedAt\": null\n                    }\n                },\n                {\n                    \"altTag\": \"adidas\",\n                    \"src\": \"https://images.unsplash.com/photo-1520256788229-d4640c632e4b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YWRpZGFzJTIwYmx1ZSUyMHNob2V8ZW58MHx8MHx8fDA%3D\",\n                    \"product\": {\n                        \"id\": 2,\n                        \"createdAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"updatedAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"deletedAt\": null\n                    }\n                }\n            ]\n        },\n        {\n            \"id\": 8,\n            \"name\": \"Red t-shirt\",\n            \"description\": \"Good red tshirt\",\n            \"product\": {\n                \"id\": 3\n            },\n            \"images\": [\n                {\n                    \"altTag\": \"tshirt\",\n                    \"src\": \"https://plus.unsplash.com/premium_photo-1697876203137-3a87c8f066c1?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\",\n                    \"product\": {\n                        \"id\": 3,\n                        \"createdAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"updatedAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"deletedAt\": null\n                    }\n                },\n                {\n                    \"altTag\": \"tshirt\",\n                    \"src\": \"https://plus.unsplash.com/premium_photo-1708110918835-4cf7886a54c1?q=80&w=1925&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\",\n                    \"product\": {\n                        \"id\": 3,\n                        \"createdAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"updatedAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"deletedAt\": null\n                    }\n                }\n            ]\n        },\n        {\n            \"id\": 10,\n            \"name\": \"Mavi t-shirt\",\n            \"description\": \"Good red tshirt\",\n            \"product\": {\n                \"id\": 4\n            },\n            \"images\": [\n                {\n                    \"altTag\": \"tshirt\",\n                    \"src\": \"https://images.unsplash.com/photo-1659423269449-361b455d3cb5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Ymx1ZSUyMHRzaGlydHxlbnwwfHwwfHx8MA%3D%3D\",\n                    \"product\": {\n                        \"id\": 4,\n                        \"createdAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"updatedAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"deletedAt\": null\n                    }\n                },\n                {\n                    \"altTag\": \"tshirt\",\n                    \"src\": \"https://plus.unsplash.com/premium_photo-1661698419172-856cdbe5a03f?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\",\n                    \"product\": {\n                        \"id\": 4,\n                        \"createdAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"updatedAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"deletedAt\": null\n                    }\n                }\n            ]\n        },\n        {\n            \"id\": 12,\n            \"name\": \"Puma Shoe\",\n            \"description\": \"puma shoe\",\n            \"product\": {\n                \"id\": 5\n            },\n            \"images\": [\n                {\n                    \"altTag\": \"shoe\",\n                    \"src\": \"https://images.unsplash.com/photo-1545289414-1c3cb1c06238?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHB1bWElMjBzaG9lfGVufDB8fDB8fHww\",\n                    \"product\": {\n                        \"id\": 5,\n                        \"createdAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"updatedAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"deletedAt\": null\n                    }\n                },\n                {\n                    \"altTag\": \"shoe\",\n                    \"src\": \"https://images.unsplash.com/photo-1542562566-c1f9c7d7e737?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\",\n                    \"product\": {\n                        \"id\": 5,\n                        \"createdAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"updatedAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"deletedAt\": null\n                    }\n                }\n            ]\n        }\n    ],\n    \"totalPage\": 2\n}"
+						},
+						{
+							"name": "filter by category",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-lang",
+										"value": "en",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"currency\": \"tl\",\n    \"category\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/product?page=1&limit=5",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"product"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "3000"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"bb8-SFkCssHjJNfRYXz8MAkkMTWBY10\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 10 Aug 2024 00:57:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"products\": [\n        {\n            \"id\": 8,\n            \"name\": \"Red t-shirt\",\n            \"description\": \"Good red tshirt\",\n            \"slug\": \"red-tisort\",\n            \"product\": {\n                \"id\": 3\n            },\n            \"images\": [\n                {\n                    \"altTag\": \"tshirt\",\n                    \"src\": \"https://plus.unsplash.com/premium_photo-1697876203137-3a87c8f066c1?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\",\n                    \"product\": {\n                        \"id\": 3,\n                        \"createdAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"updatedAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"deletedAt\": null\n                    }\n                },\n                {\n                    \"altTag\": \"tshirt\",\n                    \"src\": \"https://plus.unsplash.com/premium_photo-1708110918835-4cf7886a54c1?q=80&w=1925&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\",\n                    \"product\": {\n                        \"id\": 3,\n                        \"createdAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"updatedAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"deletedAt\": null\n                    }\n                }\n            ]\n        },\n        {\n            \"id\": 10,\n            \"name\": \"Mavi t-shirt\",\n            \"description\": \"Good red tshirt\",\n            \"slug\": \"mavi-tshirt\",\n            \"product\": {\n                \"id\": 4\n            },\n            \"images\": [\n                {\n                    \"altTag\": \"tshirt\",\n                    \"src\": \"https://images.unsplash.com/photo-1659423269449-361b455d3cb5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Ymx1ZSUyMHRzaGlydHxlbnwwfHwwfHx8MA%3D%3D\",\n                    \"product\": {\n                        \"id\": 4,\n                        \"createdAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"updatedAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"deletedAt\": null\n                    }\n                },\n                {\n                    \"altTag\": \"tshirt\",\n                    \"src\": \"https://plus.unsplash.com/premium_photo-1661698419172-856cdbe5a03f?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\",\n                    \"product\": {\n                        \"id\": 4,\n                        \"createdAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"updatedAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"deletedAt\": null\n                    }\n                }\n            ]\n        },\n        {\n            \"id\": 14,\n            \"name\": \"white t-shirt\",\n            \"description\": \"tshirt\",\n            \"slug\": \"white-tshirt\",\n            \"product\": {\n                \"id\": 6\n            },\n            \"images\": [\n                {\n                    \"altTag\": \"tshirt\",\n                    \"src\": \"https://images.unsplash.com/photo-1479936343636-73cdc5aae0c3?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\",\n                    \"product\": {\n                        \"id\": 6,\n                        \"createdAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"updatedAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"deletedAt\": null\n                    }\n                },\n                {\n                    \"altTag\": \"tshirt\",\n                    \"src\": \"https://plus.unsplash.com/premium_photo-1682096340835-022e6647b698?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\",\n                    \"product\": {\n                        \"id\": 6,\n                        \"createdAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"updatedAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"deletedAt\": null\n                    }\n                }\n            ]\n        },\n        {\n            \"id\": 16,\n            \"name\": \"black tshirt\",\n            \"description\": \"tshirt\",\n            \"slug\": \"black-tshirt\",\n            \"product\": {\n                \"id\": 7\n            },\n            \"images\": [\n                {\n                    \"altTag\": \"tshirt\",\n                    \"src\": \"https://images.unsplash.com/photo-1574462282113-38aa607fec36?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YmxhY2slMjB0c2hpcnR8ZW58MHx8MHx8fDA%3D\",\n                    \"product\": {\n                        \"id\": 7,\n                        \"createdAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"updatedAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"deletedAt\": null\n                    }\n                },\n                {\n                    \"altTag\": \"tshirt\",\n                    \"src\": \"https://plus.unsplash.com/premium_photo-1664541336483-87260a596934?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\",\n                    \"product\": {\n                        \"id\": 7,\n                        \"createdAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"updatedAt\": \"2024-08-09T19:55:26.302Z\",\n                        \"deletedAt\": null\n                    }\n                }\n            ]\n        }\n    ],\n    \"totalPage\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "product detail",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-lang",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"currency\": \"tl\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/product/nike-blue-shoe",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"product",
+								"nike-blue-shoe"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "product detail",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"currency\": \"tl\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/product/black-tshirt",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"product",
+										"black-tshirt"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "733"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2dd-68Vow2PKA0QkbHsHk7Gp6YHLu9c\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 10 Aug 2024 00:51:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"product\": {\n        \"id\": 16,\n        \"name\": \"black tshirt\",\n        \"description\": \"tshirt\",\n        \"product\": {\n            \"id\": 7\n        },\n        \"images\": [\n            {\n                \"altTag\": \"tshirt\",\n                \"src\": \"https://images.unsplash.com/photo-1574462282113-38aa607fec36?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YmxhY2slMjB0c2hpcnR8ZW58MHx8MHx8fDA%3D\",\n                \"product\": {\n                    \"id\": 7,\n                    \"createdAt\": \"2024-08-09T19:55:26.302Z\",\n                    \"updatedAt\": \"2024-08-09T19:55:26.302Z\",\n                    \"deletedAt\": null\n                }\n            },\n            {\n                \"altTag\": \"tshirt\",\n                \"src\": \"https://plus.unsplash.com/premium_photo-1664541336483-87260a596934?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\",\n                \"product\": {\n                    \"id\": 7,\n                    \"createdAt\": \"2024-08-09T19:55:26.302Z\",\n                    \"updatedAt\": \"2024-08-09T19:55:26.302Z\",\n                    \"deletedAt\": null\n                }\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "toggle delete product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo2MCwibmFtZSI6ImFraWZjYW4iLCJlbWFpbCI6ImFraWZjYW5ubm5AaWNsb3VkLmNvbSIsInJvbGUiOiJBZG1pbiJ9LCJpYXQiOjE3MjM0ODI4NzIsImV4cCI6MTcyMzU2OTI3Mn0.wZynVIsXg3yIOnAJPf6VvwPaBdchGOQdOWpQ5EamDzU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/product/12",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"product",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "empty basket",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"visitorId\": 134\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/basket/empty",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"basket",
+								"empty"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "empty basket error",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"visitorId\": 134\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/basket/empty",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"basket",
+										"empty"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "77"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4d-rYz70+sgijHzaGOjrL7rXhudNDo\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Aug 2024 18:57:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"empty\": false,\n    \"message\": \"An unexcepted error occured while empyting basket\"\n}"
+						},
+						{
+							"name": "expected",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"visitorId\": 134\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/basket/empty",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"basket",
+										"empty"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2e-esxCbVR4Bu4FQm8NVx+MFifuyPU\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Aug 2024 18:58:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"empty\": true,\n    \"message\": \"Emptied this basket\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "basket",
+			"item": [
+				{
+					"name": "Add & Update Basket",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-lang",
+								"value": "tr",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"visitorId\": 134,\n    \"quantity\": 3,\n    \"currency\": \"tl\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/basket/14",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"basket",
+								"14"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add & Update Basket",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-lang",
+										"value": "tr",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"visitorId\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/basket/7",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"basket",
+										"7"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "32"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"20-0ZHOTZ0Y4tGru5P8wWh4MKIjh/k\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Aug 2024 20:21:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Sepet güncellendi\"\n}"
+						}
+					]
+				},
+				{
+					"name": "remove from basket",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJuYW1lIjoiam9obiBkb2UiLCJlbWFpbCI6ImpvaG5kb2VAbWFpbC5jb20iLCJyb2xlIjoiVXNlciJ9LCJpYXQiOjE3MjM1MTM0MjMsImV4cCI6MTcyMzU5OTgyM30.pZqMfxtyQKYaWYGvsf3LQdgfjBossaXksr21AxmCpzk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"visitorId\": 1,\n    \"currency\": \"tl\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/basket/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"basket",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list basket",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJuYW1lIjoiam9obiBkb2UiLCJlbWFpbCI6ImpvaG5kb2VAbWFpbC5jb20iLCJyb2xlIjoiVXNlciJ9LCJpYXQiOjE3MjM1MTI4NTAsImV4cCI6MTcyMzU5OTI1MH0.lflo4UNCt1YQIIi7FnO8q4eoglMnbaHQTcMqSJJP6Y0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-lang",
+								"value": "tr",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"visitorId\": 7459,\n    \"currency\": \"euro\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/basket",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"basket"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "list basket",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-lang",
+										"value": "tr",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"visitorId\": 1,\n    \"currency\": \"euro\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/basket",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"basket"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1035"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"40b-yJRuimkefEXO8xexDqQHl+gRywE\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Aug 2024 21:33:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"basket\": [\n        {\n            \"product\": {\n                \"id\": 11,\n                \"name\": \"Mavi Tişört\",\n                \"slug\": \"mavi-tisort\"\n            },\n            \"basket\": {\n                \"id\": 1,\n                \"visitorId\": null,\n                \"quantity\": 3,\n                \"product\": {\n                    \"id\": 8\n                }\n            },\n            \"image\": {\n                \"id\": 9,\n                \"altTag\": \"tshirt\",\n                \"src\": \"https://images.unsplash.com/photo-1659423269449-361b455d3cb5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Ymx1ZSUyMHRzaGlydHxlbnwwfHwwfHx8MA%3D%3D\"\n            },\n            \"pricing\": {\n                \"unitPrice\": \"30\",\n                \"totalPrice\": 90,\n                \"price\": \"30\",\n                \"discountPrice\": null,\n                \"labels\": {\n                    \"totalPrice\": \"90€\",\n                    \"unitPrice\": \"30€\"\n                }\n            }\n        },\n        {\n            \"product\": {\n                \"id\": 9,\n                \"name\": \"Kırmızı Tişört\",\n                \"slug\": \"kirmizi-tisort\"\n            },\n            \"basket\": {\n                \"id\": 2,\n                \"visitorId\": null,\n                \"quantity\": 1,\n                \"product\": {\n                    \"id\": 7\n                }\n            },\n            \"image\": {\n                \"id\": 7,\n                \"altTag\": \"tshirt\",\n                \"src\": \"https://plus.unsplash.com/premium_photo-1697876203137-3a87c8f066c1?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\n            },\n            \"pricing\": {\n                \"unitPrice\": \"30\",\n                \"totalPrice\": 30,\n                \"price\": \"30\",\n                \"discountPrice\": null,\n                \"labels\": {\n                    \"totalPrice\": \"30€\",\n                    \"unitPrice\": \"30€\"\n                }\n            }\n        }\n    ],\n    \"pricing\": {\n        \"totalPrice\": 120,\n        \"label\": \"120€\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "total count",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozMSwibmFtZSI6ImFraWZjYW4iLCJlbWFpbCI6ImFraWZjYW5ubm5AaWNsb3VkLmNvbSIsInJvbGUiOiJVc2VyIn0sImlhdCI6MTcyMzQxNjQwNywiZXhwIjoxNzIzNTAyODA3fQ.W8G43NZZzJPZv47cxdIi6SS3hq3-JMGjSzvRFTB8wFg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"visitorId\": 7459,\n    \"currency\": \"euro\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/basket/count",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"basket",
+								"count"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "total count",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"visitorId\": 1,\n    \"currency\": \"euro\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/basket/count",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"basket",
+										"count"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "15"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"f-RG+IvEUlW3Iw5o0ALibueeB1LfE\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Aug 2024 22:16:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"totalItem\": 4\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "update a user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJuYW1lIjoiam9obiBkb2UiLCJlbWFpbCI6ImpvaG5kb2VAbWFpbC5jb20iLCJyb2xlIjoiVXNlciJ9LCJpYXQiOjE3MjM1NjAwMDEsImV4cCI6MTcyMzY0NjQwMX0.yjw48UQee_KOoO3SgTEeXFs0nQA4rJL4wG7UOsmSISg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"demoxc\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update a user",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"demoxc\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/user",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "33"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21-c+pZn54GqbkWYbVww7v7rwU86IM\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Aug 2024 14:49:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Updated this record\"\n}"
+						}
+					]
+				},
+				{
+					"name": "user detail",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJuYW1lIjoiam9obiBkb2UiLCJlbWFpbCI6ImpvaG5kb2VAbWFpbC5jb20iLCJyb2xlIjoiVXNlciJ9LCJpYXQiOjE3MjM1NjAwMDEsImV4cCI6MTcyMzY0NjQwMX0.yjw48UQee_KOoO3SgTEeXFs0nQA4rJL4wG7UOsmSISg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/user",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "user detail",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/user",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"45-6l/wbR6LAH7TAnANIzEeVHrjpOw\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 13 Aug 2024 14:40:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"name\": \"john doe\",\n        \"email\": \"johndoe@mail.com\",\n        \"role\": \"User\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "comments",
+			"item": [
+				{
+					"name": "create comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJuYW1lIjoiam9obiBkb2UiLCJlbWFpbCI6ImpvaG5kb2VAbWFpbC5jb20iLCJyb2xlIjoiVXNlciJ9LCJpYXQiOjE3MjM1NjAwMDEsImV4cCI6MTcyMzY0NjQwMX0.yjw48UQee_KOoO3SgTEeXFs0nQA4rJL4wG7UOsmSISg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-lang",
+								"value": "tr",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"comment\": \"bu ürünü beğendim dostum\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/comment/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"comment",
+								"5"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "create comment",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-lang",
+										"value": "tr",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"comment\": \"bu ürünü beğendim dostum\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/comment/12",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"comment",
+										"12"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "197"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c5-SYGmvz3J5ng5DOTX84ndIfZDfds\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Aug 2024 21:40:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"locale\": \"tr\",\n    \"content\": \"bu ürünü beğendim dostum\",\n    \"product\": {\n        \"id\": \"12\"\n    },\n    \"user\": {\n        \"id\": 61\n    },\n    \"id\": 3,\n    \"createdAt\": \"2024-08-12T18:40:12.245Z\",\n    \"deletedAt\": null,\n    \"updatedAt\": \"2024-08-12T18:40:12.245Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "list comments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo2MSwibmFtZSI6Imtqa2pqb2huIGRvZSIsImVtYWlsIjoiam9obmRvZUBtYWlsLmNvbSIsInJvbGUiOiJVc2VyIn0sImlhdCI6MTcyMzQ5NjIyMywiZXhwIjoxNzIzNTgyNjIzfQ.w_tApM3hknbCISkH7qr8Rn1DUCJHU0Pd1lQ7F6MDYIc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-lang",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/comment/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"comment",
+								"5"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "list comments",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-lang",
+										"value": "tr",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/comment/12",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"comment",
+										"12"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "122"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"7a-ufZ4BtP6VQK3ckrjmlucInOoZrg\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Aug 2024 23:30:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"totalCount\": 1,\n    \"comments\": [\n        {\n            \"id\": 6,\n            \"content\": \"lorem ipsum2\",\n            \"createdAt\": \"8/12/2024\",\n            \"user\": {\n                \"name\": \"External Comment\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "seeder",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/seed",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"seed"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "external comment",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/seed/external-comment-merge",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"seed",
+						"external-comment-merge"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
