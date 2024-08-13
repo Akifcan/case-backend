@@ -1,5 +1,10 @@
 # README
 
+## Repo Links:
+- Gateway: **https://github.com/Akifcan/case-backend**
+- Comment Service: **https://github.com/Akifcan/case-comment-service**
+- Web App: **https://github.com/Akifcan/case-frontend** 
+
 ## Server
 
 - Backend Server URL: **http://139.59.210.72:3004**
