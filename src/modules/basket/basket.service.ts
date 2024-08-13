@@ -73,8 +73,19 @@ export class BasketService {
   }
 
   async removeFromBasket(productId: number, basketDto: BasketDto, user?: User) {
-    const where = this.getQueryForUpdateBasket(productId, basketDto, user)
-    const result = await this.basketRepository.delete(where)
+    const result = await this.basketRepository
+      .createQueryBuilder('basket')
+      .delete()
+      .where(
+        '(basket.user_id = :userId OR basket.visitor_id = :visitorId) AND basket.product_id = :productId',
+        {
+          userId: user?.id,
+          visitorId: basketDto.visitorId,
+          productId: productId,
+        },
+      )
+      .execute()
+
     if (!result.affected) {
       throw new NotFoundException({
         error_code: 'basket.product_not_found',
@@ -110,8 +121,14 @@ export class BasketService {
   }
 
   async emptyBasket(emptyBasketDto: EmptyBasketDto, user?: User) {
-    const where = user ? { user: { id: user.id } } : { visitorId: emptyBasketDto.visitorId }
-    const result = await this.basketRepository.delete(where)
+    const result = await this.basketRepository
+      .createQueryBuilder('basket')
+      .delete()
+      .where('basket.user_id = :userId OR basket.visitor_id = :visitorId', {
+        userId: user?.id,
+        visitorId: emptyBasketDto.visitorId,
+      })
+      .execute()
     if (result.affected) {
       return { empty: true, message: this.i18n.t('basket.empty', { lang: I18nContext.current()?.lang }) }
     } else {
