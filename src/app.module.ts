@@ -20,6 +20,7 @@ import { CacheModuleAsyncOptions } from '@nestjs/cache-manager'
 import { CommentModule } from './modules/comment/comment.module'
 import { ServeStaticModule } from '@nestjs/serve-static'
 import { ThrottlerModule } from '@nestjs/throttler'
+import { HealthModule } from './modules/health/health.module';
 
 @Module({
   imports: [
@@ -108,6 +109,7 @@ import { ThrottlerModule } from '@nestjs/throttler'
     SeedModule,
     BasketModule,
     CommentModule,
+    HealthModule,
   ],
   providers: [
     {
