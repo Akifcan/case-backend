@@ -1,5 +1,7 @@
 # README
 
+# NOTE: I TESTED EVERYTHING BEFORE IF YOU HAVE A SETUP ISSUE PLEASE SEND ME MEET LINK TO SOLVE THE ISSUES THANK YOU :)
+
 ## Repo Links:
 - Gateway: **https://github.com/Akifcan/case-backend**
 - Comment Service: **https://github.com/Akifcan/case-comment-service**
@@ -9,7 +11,7 @@
 
 - Backend Server URL: **http://139.59.210.72:3004**
 - Backend Comment Microservice URL: **http://139.59.210.72:3005**
-- Web App URL: 
+- Web App URL: **http://139.59.210.72:3006/en**
 
 ## Installation
 
@@ -63,7 +65,7 @@
 - ## Tests
  - `yarn test`
 
-- ## Please run the seeder before execute the tests.
+- ## Please run the seeder before execute the tests. (Read the Case Backend Section for more info)
 
 
 ## Case Backend
@@ -106,7 +108,8 @@
     COMMENT_SERVICE_PORT=3002
     COMMENT_SERVICE_HOST=localhost
 
-    HEALTHCHECK_URI=http://localhost:3000/health```
+    HEALTHCHECK_URI=http://localhost:3000/health
+  ```
 
   
  - `yarn install`
@@ -124,7 +127,7 @@
 - ## Tests
 - # Please run seeder before the tests.
 - `yarn test`
-- `yarn test:2e`
+- `yarn test:e2e`
 
 
 ---
