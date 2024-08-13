@@ -40,7 +40,11 @@ export class BasketController {
 
   @Public()
   @Delete(':productId')
-  removeFromBasket(@Param('productId') productId: number, @Body() basketDto: BasketDto) {
-    return this.basketService.removeFromBasket(productId, basketDto)
+  removeFromBasket(
+    @Param('productId') productId: number,
+    @Body() basketDto: BasketDto,
+    @CurrentUser() user: User,
+  ) {
+    return this.basketService.removeFromBasket(productId, basketDto, user)
   }
 }
