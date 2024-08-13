@@ -1,6 +1,7 @@
 export interface AppConfig {
   port: number
   fallbackLanguage: string
+  healthcheckUri: string
 }
 
 export interface DbConfig {
