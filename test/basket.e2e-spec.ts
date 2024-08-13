@@ -3,14 +3,12 @@ import { INestApplication } from '@nestjs/common'
 import * as request from 'supertest'
 import { AppModule } from '../src/app.module'
 import { BasketService } from '../src/modules/basket/basket.service'
-import { UserService } from '../src/modules/user/user.service'
 import { SeedController } from '../src/seed/seed.controller'
 import { Currency } from '../src/shared/shared.types'
 
 describe('Basket Controller (e2e)', () => {
   let app: INestApplication
   let basketService: BasketService
-  let userService: UserService
   let seedController: SeedController
 
   beforeEach(async () => {
@@ -20,7 +18,6 @@ describe('Basket Controller (e2e)', () => {
 
     app = moduleFixture.createNestApplication()
     basketService = moduleFixture.get<BasketService>(BasketService)
-    userService = moduleFixture.get<UserService>(UserService)
     seedController = moduleFixture.get<SeedController>(SeedController)
 
     await app.init()
@@ -192,10 +189,6 @@ describe('Basket Controller (e2e)', () => {
     expect(response.statusCode).toBe(201)
     expect(response.body).toHaveProperty('totalItem')
     expect(response.body.totalItem).toBe(2)
-    // expect(response.statusCode).toBe(201)
-    // expect(response.body).toHaveProperty('basket')
-    // expect(response.body).toHaveProperty('pricing')
-    // expect(response.body.basket.length).toBe(2)
     await basketService.basketRepository.delete({ user: { id: userId } })
   })
 })
