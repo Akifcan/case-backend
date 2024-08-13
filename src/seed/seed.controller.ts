@@ -40,7 +40,7 @@ export class SeedController {
         {
           name: 'akifcan',
           email: 'akifcannnn@icloud.com',
-          role: UserRole.user,
+          role: UserRole.admin,
           password: 'test123A%',
         },
         {
