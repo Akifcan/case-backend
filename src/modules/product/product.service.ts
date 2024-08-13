@@ -95,7 +95,7 @@ export class ProductService {
     const product = await this.productI18nRepository.findOne({
       where: { slug },
       relations: ['product'],
-      select: { id: true, product: { id: true } },
+      select: { id: true, name: true, product: { id: true } },
     })
 
     const alternates = await this.productI18nRepository.find({
@@ -103,12 +103,16 @@ export class ProductService {
       where: { product: { id: product.product.id } },
     })
 
-    const response = alternates.map((x) => {
-      return {
-        locale: x.language,
-        slug: `/${x.language}/product/${x.slug}`,
-      }
+    const links: Record<string, string> = {}
+
+    alternates.forEach((alternate) => {
+      links[alternate.language] = `/${alternate.language}/product/${alternate.slug}`
     })
+
+    const response = {
+      title: product.name,
+      links,
+    }
     this.cacheManager.set(cacheKey, JSON.stringify(response), 10)
     return response
   }
