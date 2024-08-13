@@ -41,6 +41,12 @@ export class ProductController {
     return this.productService.product(slug, productListDto, cacheKey)
   }
 
+  @Public()
+  @Post(':slug/meta')
+  productMeta(@Param('slug') slug: string) {
+    return this.productService.productMeta(slug)
+  }
+
   @UseGuards(RoleGuard)
   @Delete(':productId')
   deleteProduct(@Param('productId') productId: number) {

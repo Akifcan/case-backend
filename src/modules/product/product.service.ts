@@ -88,6 +88,31 @@ export class ProductService {
     return response
   }
 
+  async productMeta(slug: string) {
+    const cacheKey = `cache-meta-${slug}`
+    await this.useCache(cacheKey)
+
+    const product = await this.productI18nRepository.findOne({
+      where: { slug },
+      relations: ['product'],
+      select: { id: true, product: { id: true } },
+    })
+
+    const alternates = await this.productI18nRepository.find({
+      select: { id: true, slug: true, language: true },
+      where: { product: { id: product.product.id } },
+    })
+
+    const response = alternates.map((x) => {
+      return {
+        locale: x.language,
+        slug: `/${x.language}/product/${x.slug}`,
+      }
+    })
+    this.cacheManager.set(cacheKey, JSON.stringify(response), 10)
+    return response
+  }
+
   private async getCategoryId(categorySlug: string): Promise<number | undefined> {
     const category = await this.categoryI18nRepository.findOne({
       select: { category: { id: true } },
