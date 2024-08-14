@@ -2,6 +2,8 @@
 
 # NOTE: I TESTED EVERYTHING BEFORE IF YOU HAVE A SETUP ISSUE PLEASE SEND ME MEET LINK TO SOLVE THE ISSUES THANK YOU :)
 
+![image](https://i.hizliresim.com/mv3yt6m.png)
+![image](https://i.hizliresim.com/kv03eti.png)
 
 ## Repo Links:
 - Gateway: **https://github.com/Akifcan/case-backend**
@@ -65,7 +67,11 @@
   RATE_LIMIT=10
 
   COMMENT_SERVICE_PORT=3002
-  COMMENT_SERVICE_HOST=localhost```
+  COMMENT_SERVICE_HOST=localhost
+  
+  HEALTHCHECK_URI=http://localhost:3000/health
+  
+  ```
 
 ---
 
