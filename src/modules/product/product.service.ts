@@ -82,6 +82,7 @@ export class ProductService {
 
     return {
       id: product.id,
+      slug: details[0].slug,
       message: this.i18n.t('product.admin.created', { lang: I18nContext.current()?.lang }),
     }
   }
