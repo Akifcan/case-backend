@@ -5,10 +5,12 @@ import { AppModule } from '../src/app.module'
 import { CreateProductDto } from '../src/modules/product/dtos/create-product.dto'
 import { Currency, Locale } from '../src/shared/shared.types'
 import { ProductService } from '../src/modules/product/product.service'
+import { SeedController } from '../src/seed/seed.controller'
 
 describe('Product Controller (e2e)', () => {
   let app: INestApplication
   let productService: ProductService
+  let seedController: SeedController
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -17,7 +19,7 @@ describe('Product Controller (e2e)', () => {
 
     app = moduleFixture.createNestApplication()
     productService = moduleFixture.get<ProductService>(ProductService)
-
+    seedController = moduleFixture.get<SeedController>(SeedController)
     await app.init()
   })
 
@@ -123,9 +125,10 @@ describe('Product Controller (e2e)', () => {
 
     const accessToken = login.body.accessToken
     expect(login.body).toHaveProperty('accessToken')
+    const categories = await seedController.categoryRepository.find({ take: 2 })
 
     const obj: CreateProductDto = {
-      categoryId: 5,
+      categoryId: categories[0].id,
       images: [
         {
           altTag: 'asdf',
