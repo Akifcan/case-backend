@@ -2,6 +2,7 @@
 
 # NOTE: I TESTED EVERYTHING BEFORE IF YOU HAVE A SETUP ISSUE PLEASE SEND ME MEET LINK TO SOLVE THE ISSUES THANK YOU :)
 
+
 ## Repo Links:
 - Gateway: **https://github.com/Akifcan/case-backend**
 - Comment Service: **https://github.com/Akifcan/case-comment-service**
@@ -12,6 +13,17 @@
 - Backend Server URL: **http://139.59.210.72:3004**
 - Backend Comment Microservice URL: **http://139.59.210.72:3005**
 - Web App URL: **http://139.59.210.72:3006/en**
+
+## Test Accounts
+
+ -  **email:** akifcannnn@icloud.com (Role: Admin)
+ -  **password:** test123A%
+
+ ---
+
+ -  **email:** johndoe@mail.com (Role: User)
+ -  **password:** test123A%
+
 
 ## Installation
 
