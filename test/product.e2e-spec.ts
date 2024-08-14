@@ -61,9 +61,10 @@ describe('Product Controller (e2e)', () => {
 
     const accessToken = login.body.accessToken
     expect(login.body).toHaveProperty('accessToken')
+    const categories = await seedController.categoryRepository.find({ take: 2 })
 
     const obj: CreateProductDto = {
-      categoryId: 5,
+      categoryId: categories[0].id,
       images: [
         {
           altTag: 'asdf',
