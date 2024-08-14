@@ -3,9 +3,11 @@ import { ProductService } from './product.service'
 import { AppModule } from '../../app.module'
 import { CreateProductDto } from './dtos/create-product.dto'
 import { Currency, Locale } from '../../shared/shared.types'
+import { SeedController } from '../../seed/seed.controller'
 
 describe('ProductService', () => {
   let service: ProductService
+  let seedController: SeedController
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -13,6 +15,7 @@ describe('ProductService', () => {
     }).compile()
 
     service = module.get<ProductService>(ProductService)
+    seedController = module.get<SeedController>(SeedController)
   })
 
   it('should be defined', () => {
@@ -101,8 +104,9 @@ describe('ProductService', () => {
   })
 
   it('should create product', async () => {
+    const categories = await seedController.categoryRepository.find({ take: 2 })
     const obj: CreateProductDto = {
-      categoryId: 5,
+      categoryId: categories[0].id,
       images: [
         {
           altTag: 'asdf',
