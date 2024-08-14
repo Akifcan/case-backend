@@ -1,6 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { ProductService } from './product.service'
 import { AppModule } from '../../app.module'
+import { CreateProductDto } from './dtos/create-product.dto'
+import { Currency, Locale } from '../../shared/shared.types'
 
 describe('ProductService', () => {
   let service: ProductService
@@ -96,5 +98,55 @@ describe('ProductService', () => {
     } catch (e) {
       expect(e.response.error_code).toBe('product.not_found')
     }
+  })
+
+  it('should create product', async () => {
+    const obj: CreateProductDto = {
+      categoryId: 5,
+      images: [
+        {
+          altTag: 'asdf',
+          src: 'https://images.unsplash.com/photo-1719937206220-f7c76cc23d78?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        },
+        {
+          altTag: 'asdf2',
+          src: 'https://images.unsplash.com/photo-1719937206220-f7c76cc23d78?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        },
+      ],
+      pricing: [
+        {
+          currency: Currency.tl,
+          price: 200,
+        },
+        {
+          currency: Currency.euro,
+          price: 10,
+        },
+        {
+          currency: Currency.dollar,
+          price: 9,
+        },
+      ],
+      info: [
+        {
+          language: Locale.tr,
+          name: 'testTR',
+          description: 'test description',
+          slug: 'test',
+        },
+        {
+          language: Locale.en,
+          name: 'testEN',
+          description: 'test description',
+          slug: 'test',
+        },
+      ],
+    }
+
+    const result = await service.createProduct(obj)
+    expect(result).toHaveProperty('id')
+    expect(result).toHaveProperty('message')
+    expect(result.message).toBe('New product created')
+    await service.productRepository.delete({ id: result.id })
   })
 })

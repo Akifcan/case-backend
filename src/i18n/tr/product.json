@@ -1,6 +1,7 @@
 {
     "admin": {
         "removed": "Bu ürün kaldırıldı",
-        "activated": "Bu ürün tekrardan aktif edildi"
+        "activated": "Bu ürün tekrardan aktif edildi",
+        "created": "Yeni ürün oluşturuldu"
     }
 }

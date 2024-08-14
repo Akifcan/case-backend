@@ -1,6 +1,7 @@
 {
     "admin": {
         "removed": "This product removed",
-        "activated": "This product reactivated"
+        "activated": "This product reactivated",
+        "created": "New product created"
     }
 }

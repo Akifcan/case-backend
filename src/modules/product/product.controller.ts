@@ -16,6 +16,7 @@ import { ProductListDto } from './dtos/product-list.dto'
 import { Public } from '../../decorators/is-public.decorator'
 import { ProductQueryDto } from './dtos/product-query.dto'
 import { RoleGuard } from '../auth/role.guard'
+import { CreateProductDto } from './dtos/create-product.dto'
 
 @Controller('product')
 export class ProductController {
@@ -31,6 +32,12 @@ export class ProductController {
     const cacheKey = req.url + JSON.stringify(productListDto) + JSON.stringify(productQueryDto).toString()
     Logger.log(cacheKey, 'cache key')
     return this.productService.products(productListDto, productQueryDto, cacheKey)
+  }
+
+  @UseGuards(RoleGuard)
+  @Post('new-product')
+  async newProduct(@Body() createProductDto: CreateProductDto) {
+    return this.productService.createProduct(createProductDto)
   }
 
   @Public()

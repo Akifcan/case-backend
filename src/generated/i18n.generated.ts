@@ -20,6 +20,7 @@ export type I18nTranslations = {
         "admin": {
             "removed": string;
             "activated": string;
+            "created": string;
         };
     };
     "user": {
